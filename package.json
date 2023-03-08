@@ -12,5 +12,8 @@
   "dependencies": {
     "discord.js": "^14.7.1",
     "dotenv": "^16.0.3"
+  },
+  "optionalDependencies": {
+    "bufferutil": "^4.0.7"
   }
 }
