@@ -7,11 +7,15 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 .eslintrc.json
+.prettierrc.json
+.eslintrc.json
+logs/
 
 # environment variables
 .env
 .env.production
 config.json
+config.js
 
 # macOS-specific files
 .DS_Store
