@@ -5,7 +5,7 @@
 ## to do
 
 - "invited from \_\_\_"
-  - edit `inviter.js`, `invite.js`, `greetings.js`
+  - edit `inviter.js`, `invite.js`, `greetings.js`, ~~member.js schema~~
 - prefix commands
 - leveling/rep gain adjustments
 - badges

@@ -6,7 +6,7 @@ const { getSettings } = require('@schemas/Guild');
  * @param {import('discord.js').GuildMember} member
  * @param {Object} inviterData
  */
-const parse = async (content, member, inviterData = {}, usedInviteCode) => {
+const parse = async (content, member, inviterData = {}) => {
 	const inviteData = {};
 
 	const getEffectiveInvites = (inviteData = {}) =>
@@ -43,8 +43,7 @@ const parse = async (content, member, inviterData = {}, usedInviteCode) => {
 		.replaceAll(/{member:avatar}/g, member.displayAvatarURL())
 		.replaceAll(/{inviter:name}/g, inviteData.name)
 		.replaceAll(/{inviter:tag}/g, inviteData.tag)
-		.replaceAll(/{invites}/g, getEffectiveInvites(inviterData.invite_data))
-		.replaceAll(/{invite:code}/g, usedInviteCode);
+		.replaceAll(/{invites}/g, getEffectiveInvites(inviterData.invite_data));
 };
 
 /**
@@ -52,19 +51,18 @@ const parse = async (content, member, inviterData = {}, usedInviteCode) => {
  * @param {"WELCOME"|"FAREWELL"} type
  * @param {Object} config
  * @param {Object} inviterData
- * @param {string} usedInviteCode
  */
-const buildGreeting = async (member, type, config, inviterData, usedInviteCode) => {
+const buildGreeting = async (member, type, config, inviterData) => {
 	if (!config) return;
 	let content;
 
 	// build content
-	if (config.content) content = await parse(config.content, member, inviterData, usedInviteCode);
+	if (config.content) content = await parse(config.content, member, inviterData);
 
 	// build embed
 	const embed = new EmbedBuilder();
 	if (config.embed.description) {
-		const parsed = await parse(config.embed.description, member, inviterData, usedInviteCode);
+		const parsed = await parse(config.embed.description, member, inviterData);
 		embed.setDescription(parsed);
 	}
 	if (config.embed.color) embed.setColor(config.embed.color);
@@ -79,17 +77,11 @@ const buildGreeting = async (member, type, config, inviterData, usedInviteCode) 
 	}
 
 	// set default message
-	const inviteSource = {
-		'code_here': 'Twitter',
-		'code_here': 'Facebook',
-	};
-
 	if (!config.content && !config.embed.description && !config.embed.footer) {
-		const phrase = inviteSource[usedInviteCode] || 'the unknown';
 		content =
 			type === 'WELCOME'
-				? `${member.displayName} joined from ${phrase}! 🎉`
-				: `${member.user.tag} left the server`;
+				? `Welcome to the server, ${member.displayName} 🎉`
+				: `${member.user.tag} has left the server 👋`;
 		return { content };
 	}
 

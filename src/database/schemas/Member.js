@@ -16,6 +16,7 @@ const Schema = new mongoose.Schema(
 		strikes: { type: Number, default: 0 },
 		warnings: { type: Number, default: 0 },
 		invite_data: {
+			platform: String,
 			inviter: String,
 			code: String,
 			tracked: { type: Number, default: 0 },
