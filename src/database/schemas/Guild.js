@@ -57,14 +57,6 @@ const Schema = new mongoose.Schema({
 		},
 		limit: { type: Number, default: 5 },
 	},
-	counters: [
-		{
-			_id: false,
-			counter_type: String,
-			name: String,
-			channel_id: String,
-		},
-	],
 	welcome: {
 		enabled: Boolean,
 		channel: String,

@@ -131,4 +131,3 @@ module.exports = {
 	sendWelcome,
 	sendFarewell,
 };
-

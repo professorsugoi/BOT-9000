@@ -55,15 +55,6 @@ By default, Auto moderation events are ignored for members who have the followin
 Each time a member tries to break the automated rule, he/she **receives a strike**. After receiving the maximum number of strikes (default 10), the moderation action (default TIMEOUT) is performed on them
 {% endhint %}
 
-### Channels Counters
-
-- **Description:** setup counter channel in the guild
-- **Usage**: `!counter <counter_type> <name>`
-- **Available counters** **types**
-  - USERS: counts the total server member count (members + bots)
-  - MEMBERS: counts the total member count
-  - BOTS: counts the total number of bots
-
 ### Warnings
 
 - **!maxwarn limit \<amount>**: set max warnings a member can receive before taking an action
@@ -192,3 +183,4 @@ _Enabling this feature will allow members to simply react to any message with a 
 
 - **Usage**: `!removerr <#channel> <messageId>`
 - **Description**: remove configured reaction for the specified message
+

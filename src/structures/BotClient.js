@@ -53,7 +53,6 @@ module.exports = class BotClient extends Client {
 		 * @type {Collection<string, import('@structures/BaseContext')>}
 		 */
 		this.contextMenus = new Collection(); // store contextMenus
-		this.counterUpdateQueue = []; // store guildId's that needs counter update
 
 		// initialize webhook for sending guild join/leave details
 		this.joinLeaveWebhook = process.env.JOIN_LEAVE_LOGS
