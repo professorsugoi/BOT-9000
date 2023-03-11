@@ -1,15 +1,20 @@
+## docs
+
+[\index.md](docs\index.md)
+
 ## to do
 
-- site only as a readme
-- leveling
+- "invited from \_\_\_"
+  - edit `inviter.js`, `invite.js`, `greetings.js`
+- prefix commands
+- leveling/rep gain adjustments
 - badges
 - modlogs
 - `@napi-rs/canvas` for rank cards
 
 ## resources
 
-- [https://github.com/saiteja-madha/discord-js-bot](main template)
-
+- [https://github.com/saiteja-madha/discord-js-bot](Saiteja-madha Template)
 - [https://autocode.com/tools/discord/embed-builder](embed builder)
 - [https://github.com/discordjs/guide](discordjs guide)
-- [https://github.com/TFAGaming/DiscordJS-V14-Bot-Template](/TFAGaming / DiscordJS-V14-Bot-Template)
+- [https://github.com/TFAGaming/DiscordJS-V14-Bot-Template](TFAGaming Template)
