@@ -1,6 +1,6 @@
 ## docs
 
-[\index.md](docs\index.md)
+[/index.md](/docs/index.md)
 
 ## to do
 
