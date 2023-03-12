@@ -12,20 +12,17 @@ module.exports = {
 	category: 'SOCIAL',
 	command: {
 		enabled: true,
-		usage: '',
-	},
-	slashCommand: {
-		enabled: true,
-		options: [],
+		usage: '!daily',
+		aliases: ['d'],
 	},
 
-	async messageRun(message, args, data) {
+	async messageRun(message) {
 		const user = message.author;
 		const response = await claimDaily(user);
 		await message.safeReply(response);
 	},
 
-	async interactionRun(interaction, data) {
+	async interactionRun(interaction) {
 		const user = interaction.user;
 		const response = await claimDaily(user);
 		await interaction.followUp(response);

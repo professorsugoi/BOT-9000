@@ -1,3 +1,5 @@
+cloned bot gutted of most features
+
 ## docs
 
 [/index.md](/docs/index.md)

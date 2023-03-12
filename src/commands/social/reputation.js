@@ -32,7 +32,7 @@ module.exports = {
 		let response;
 
 		// status
-		if (sub === 'view') {
+		if (sub === 'view' || sub === 'v') {
 			let target = message.author;
 			if (args.length > 1) {
 				const resolved = (await message.guild.resolveMember(args[1])) || message.member;
@@ -42,7 +42,7 @@ module.exports = {
 		}
 
 		// give
-		else if (sub === 'give') {
+		else if (sub === 'give' || sub === 'g') {
 			const target = await message.guild.resolveMember(args[1]);
 			if (!target) return message.safeReply('Please provide a valid user to give reputation to');
 			response = await giveReputation(message.author, target.user);
@@ -50,7 +50,7 @@ module.exports = {
 
 		//
 		else {
-			response = 'Incorrect command usage';
+			response = 'usage: `!rep give [user]` || `!rep view [user]`';
 		}
 
 		await message.safeReply(response);
@@ -61,13 +61,13 @@ module.exports = {
 		let response;
 
 		// status
-		if (sub === 'view') {
+		if (sub === 'view' || sub === 'v') {
 			const target = interaction.options.getUser('user') || interaction.user;
 			response = await viewReputation(target);
 		}
 
 		// give
-		if (sub === 'give') {
+		if (sub === 'give' || sub === 'g') {
 			const target = interaction.options.getUser('user');
 			response = await giveReputation(interaction.user, target);
 		}
@@ -81,7 +81,7 @@ async function viewReputation(target) {
 	if (!userData) return `${target.tag} has no reputation yet`;
 
 	const embed = new EmbedBuilder()
-		.setAuthor({ name: `Reputation for ${target.username}` })
+		.setAuthor({ name: `Rep for ${target.username}` })
 		.setColor(EMBED_COLORS.BOT_EMBED)
 		.setThumbnail(target.displayAvatarURL())
 		.addFields(
