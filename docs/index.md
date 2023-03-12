@@ -1,21 +1,18 @@
 # Table of contents
 
-- [README](../README.md)
-
 ## Commands
 
-- [❗ Admin](commands/admin.md)
-- [❗ Giveaways](commands/giveaways.md)
-- [❗ Information](commands/information.md)
-- [❗ Invites](commands/invites.md)
+- [‼ Admin & Setup](commands/admin_setup.md)
 - [❗ Moderation](commands/moderation.md)
-- [❗ Owner](commands/owner.md)
-- [❗ Social](commands/social.md)
-- [❗ Stats](commands/stats.md)
-- [❗ Utility](commands/utility.md)
+- [❕ Information](commands/information.md)
+- [❣ Social](commands/social.md)
 
 ## Additional
 
-- [❓ Guides](install.md)
-- [❓ FAQ](faq.md)
+- [❓ Install](install.md)
+- [❓ Cmd Template](src/structures/Command.js)
+
+---
+
+<- [README](../README.md)
 

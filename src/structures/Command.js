@@ -53,7 +53,6 @@ module.exports = {
 	name: '',
 	description: '',
 	cooldown: 0,
-	isPremium: false,
 	category: 'NONE',
 	botPermissions: [],
 	userPermissions: [],

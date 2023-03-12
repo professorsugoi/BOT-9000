@@ -12,11 +12,11 @@ module.exports = {
 		subcommands: [
 			{
 				trigger: 'limit <number>',
-				description: 'set max warnings a member can receive before taking an action',
+				description: 'set max warnings before taking an action',
 			},
 			{
 				trigger: 'action <timeout|kick|ban>',
-				description: 'set action to performed after receiving maximum warnings',
+				description: 'set action to be taken when maxwarn threshold is reached',
 			},
 		],
 	},
@@ -67,7 +67,7 @@ async function setLimit(limit, settings) {
 async function setAction(guild, action, settings) {
 	if (action === 'TIMEOUT') {
 		if (!guild.members.me.permissions.has('ModerateMembers')) {
-			return 'I do not permission to timeout members';
+			return 'I do not have permission to timeout members';
 		}
 	}
 

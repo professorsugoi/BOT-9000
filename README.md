@@ -1,22 +1,27 @@
-cloned bot gutted of most features
+cloned bot i gutted
 
-## docs
+## DOCS
 
 [/index.md](/docs/index.md)
 
-## to do
+## IMPORTANT
+
+- manage default permissions/security
+
+## TO DO
 
 - "invited from \_\_\_"
   - edit `inviter.js`, `invite.js`, `greetings.js`, ~~member.js schema~~
-- prefix commands
+- ~~prefix commands~~
 - leveling/rep gain adjustments
 - badges
 - modlogs
 - `@napi-rs/canvas` for rank cards
 - clean up `!rep view`, `!daily`
 - add rep count to !stats card
+- rm/merge ton of setup commands for greeting config
 
-## resources
+## RESOURCES
 
 - [https://github.com/saiteja-madha/discord-js-bot](Saiteja-madha Template)
 - [https://autocode.com/tools/discord/embed-builder](embed builder)

@@ -391,4 +391,3 @@ async function runModalEdit(message, messageId) {
 	const response = await edit(message.member, messageId, addDuration, newPrize, newWinnerCount);
 	await modal.editReply(response);
 }
-
