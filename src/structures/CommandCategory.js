@@ -12,22 +12,11 @@ module.exports = {
 		image: 'https://icons.iconarchive.com/icons/dakirby309/simply-styled/256/Settings-icon.png',
 		emoji: '👁‍🗨',
 	},
-	FUN: {
-		name: 'Fun',
-		image: 'https://icons.iconarchive.com/icons/flameia/aqua-smiles/128/make-fun-icon.png',
-		emoji: '🍥',
-	},
 	GIVEAWAY: {
 		name: 'Giveaway',
 		enabled: config.GIVEAWAYS.ENABLED,
 		image: 'https://cdn-icons-png.flaticon.com/512/4470/4470928.png',
 		emoji: '🎉',
-	},
-	INVITE: {
-		name: 'Invite',
-		enabled: config.INVITE.ENABLED,
-		image: 'https://cdn4.iconfinder.com/data/icons/general-business/150/Invite-512.png',
-		emoji: '✉',
 	},
 	INFORMATION: {
 		name: 'Information',

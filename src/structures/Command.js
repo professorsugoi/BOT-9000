@@ -11,7 +11,7 @@
  */
 
 /**
- * @typedef {"ADMIN"|"AUTOMOD"|"FUN"|"INFORMATION"|"INVITE"|"MODERATION"|"NONE"|"OWNER"|"SOCIAL"|"UTILITY"} CommandCategory
+ * @typedef {"ADMIN"|"AUTOMOD"|"INFORMATION"|"MODERATION"|"NONE"|"OWNER"|"SOCIAL"|"UTILITY"} CommandCategory
  */
 
 /**
@@ -72,4 +72,3 @@ module.exports = {
 	messageRun: (message, args, data) => {},
 	interactionRun: (interaction, data) => {},
 };
-
