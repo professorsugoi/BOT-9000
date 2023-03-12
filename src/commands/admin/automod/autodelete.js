@@ -1,5 +1,3 @@
-const { ApplicationCommandOptionType } = require('discord.js');
-
 /**
  * @type {import("@structures/Command")}
  */

@@ -1,6 +1,5 @@
 const { isHex } = require('@helpers/Utils');
 const { buildGreeting } = require('@handlers/greeting');
-const { ApplicationCommandOptionType, ChannelType } = require('discord.js');
 
 /**
  * @type {import("@structures/Command")}
