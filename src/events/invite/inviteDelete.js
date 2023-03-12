@@ -4,7 +4,7 @@ const { getInviteCache } = require('@handlers/invite');
  * @param {import('@src/structures').BotClient} client
  * @param {import('discord.js').Invite} invite
  */
-module.exports = async (client, invite) => {
+module.exports = async (invite) => {
 	const cachedInvites = getInviteCache(invite?.guild);
 
 	// Check if invite code exists in the cache

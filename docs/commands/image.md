@@ -8,7 +8,6 @@ description: 32 commands
 
 - **Description**: image meme generator
 - **Command Usage**: `!{available generator}`
-- **Slash Usage**: `/generator <name>`;
 - **Cooldown**: 5 seconds
 - **Available Generators**:
 

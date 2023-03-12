@@ -1,4 +1,4 @@
-const { EmbedBuilder, ApplicationCommandOptionType } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 const { MESSAGES } = require('@root/config.js');
 const { getJson } = require('@helpers/HttpUtils');
 const { stripIndent } = require('common-tags');
@@ -17,17 +17,6 @@ module.exports = {
 		aliases: ['git'],
 		usage: '<username>',
 		minArgsCount: 1,
-	},
-	slashCommand: {
-		enabled: true,
-		options: [
-			{
-				name: 'username',
-				description: 'github username',
-				type: ApplicationCommandOptionType.String,
-				required: true,
-			},
-		],
 	},
 
 	async messageRun(message, args) {

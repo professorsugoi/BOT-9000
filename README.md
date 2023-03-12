@@ -11,6 +11,8 @@
 - badges
 - modlogs
 - `@napi-rs/canvas` for rank cards
+- clean up `!rep view`, `!daily`
+- add rep count to !stats card
 
 ## resources
 

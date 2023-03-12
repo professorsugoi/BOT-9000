@@ -7,10 +7,9 @@ const {
 	Message,
 	ButtonBuilder,
 	CommandInteraction,
-	ApplicationCommandOptionType,
 	ButtonStyle,
 } = require('discord.js');
-const { getCommandUsage, getSlashUsage } = require('@handlers/command');
+const { getCommandUsage } = require('@handlers/command');
 
 const CMDS_PER_PAGE = 5;
 const IDLE_TIMEOUT = 30;
@@ -26,17 +25,6 @@ module.exports = {
 	command: {
 		enabled: true,
 		usage: '[command]',
-	},
-	slashCommand: {
-		enabled: true,
-		options: [
-			{
-				name: 'command',
-				description: 'name of the command',
-				required: false,
-				type: ApplicationCommandOptionType.String,
-			},
-		],
 	},
 
 	async messageRun(message, args, data) {
@@ -68,13 +56,6 @@ module.exports = {
 			const response = await getHelpMenu(interaction);
 			const sentMsg = await interaction.followUp(response);
 			return waiter(sentMsg, interaction.user.id);
-		}
-
-		// check if command help (!help cat)
-		const cmd = interaction.client.slashCommands.get(cmdName);
-		if (cmd) {
-			const embed = getSlashUsage(cmd);
-			return interaction.followUp({ embeds: [embed] });
 		}
 
 		// No matching command/category found

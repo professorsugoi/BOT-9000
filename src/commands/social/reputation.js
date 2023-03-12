@@ -1,5 +1,5 @@
 const { getUser } = require('@schemas/User');
-const { EmbedBuilder, ApplicationCommandOptionType } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 const { diffHours, getRemainingTime } = require('@helpers/Utils');
 const { EMBED_COLORS } = require('@root/config');
 
@@ -23,37 +23,6 @@ module.exports = {
 			{
 				trigger: 'give [user]',
 				description: 'give reputation to a user',
-			},
-		],
-	},
-	slashCommand: {
-		enabled: true,
-		options: [
-			{
-				name: 'view',
-				description: 'view reputation for a user',
-				type: ApplicationCommandOptionType.Subcommand,
-				options: [
-					{
-						name: 'user',
-						description: 'the user to check reputation for',
-						type: ApplicationCommandOptionType.User,
-						required: false,
-					},
-				],
-			},
-			{
-				name: 'give',
-				description: 'give reputation to a user',
-				type: ApplicationCommandOptionType.Subcommand,
-				options: [
-					{
-						name: 'user',
-						description: 'the user to check reputation for',
-						type: ApplicationCommandOptionType.User,
-						required: true,
-					},
-				],
 			},
 		],
 	},

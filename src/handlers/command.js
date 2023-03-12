@@ -172,27 +172,6 @@ module.exports = {
 		if (title) embed.setAuthor({ name: title });
 		return embed;
 	},
-
-	/**
-	 * @param {import('@structures/Command')} cmd - command object
-	 */
-	getSlashUsage(cmd) {
-		let desc = '';
-		if (cmd.slashCommand.options.find((o) => o.type === 'SUB_COMMAND')) {
-			const subCmds = cmd.slashCommand.options.filter((opt) => opt.type === 'SUB_COMMAND');
-			subCmds.forEach((sub) => {
-				desc += `\`/${cmd.name} ${sub.name}\`\n❯ ${sub.description}\n\n`;
-			});
-		} else {
-			desc += `\`/${cmd.name}\`\n\n**Help:** ${cmd.description}`;
-		}
-
-		if (cmd.cooldown) {
-			desc += `\n**Cooldown:** ${timeformat(cmd.cooldown)}`;
-		}
-
-		return new EmbedBuilder().setColor(EMBED_COLORS.BOT_EMBED).setDescription(desc);
-	},
 };
 
 /**
