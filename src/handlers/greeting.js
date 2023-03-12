@@ -4,34 +4,8 @@ const { getSettings } = require('@schemas/Guild');
 /**
  * @param {string} content
  * @param {import('discord.js').GuildMember} member
- * @param {Object} inviterData
  */
-const parse = async (content, member, inviterData = {}) => {
-	const inviteData = {};
-
-	const getEffectiveInvites = (inviteData = {}) =>
-		inviteData.tracked + inviteData.added - inviteData.fake - inviteData.left || 0;
-
-	if (content.includes('{inviter:')) {
-		const inviterId = inviterData.member_id || 'NA';
-		if (inviterId !== 'VANITY' && inviterId !== 'NA') {
-			try {
-				const inviter = await member.client.users.fetch(inviterId);
-				inviteData.name = inviter.username;
-				inviteData.tag = inviter.tag;
-			} catch (ex) {
-				member.client.logger.error(`Parsing inviterId: ${inviterId}`, ex);
-				inviteData.name = 'NA';
-				inviteData.tag = 'NA';
-			}
-		} else if (member.user.bot) {
-			inviteData.name = 'OAuth';
-			inviteData.tag = 'OAuth';
-		} else {
-			inviteData.name = inviterId;
-			inviteData.tag = inviterId;
-		}
-	}
+const parse = async (content, member = {}) => {
 	return content
 		.replaceAll(/\\n/g, '\n')
 		.replaceAll(/{server}/g, member.guild.name)
@@ -40,10 +14,7 @@ const parse = async (content, member, inviterData = {}) => {
 		.replaceAll(/{member:name}/g, member.user.username)
 		.replaceAll(/{member:dis}/g, member.user.discriminator)
 		.replaceAll(/{member:tag}/g, member.user.tag)
-		.replaceAll(/{member:avatar}/g, member.displayAvatarURL())
-		.replaceAll(/{inviter:name}/g, inviteData.name)
-		.replaceAll(/{inviter:tag}/g, inviteData.tag)
-		.replaceAll(/{invites}/g, getEffectiveInvites(inviterData.invite_data));
+		.replaceAll(/{member:avatar}/g, member.displayAvatarURL());
 };
 
 /**

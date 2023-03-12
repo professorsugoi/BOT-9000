@@ -1,5 +1,3 @@
-const { ApplicationCommandOptionType, ChannelType } = require('discord.js');
-
 /**
  * @type {import("@structures/Command")}
  */

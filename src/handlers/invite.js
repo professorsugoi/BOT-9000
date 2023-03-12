@@ -36,31 +36,6 @@ async function cacheGuildInvites(guild) {
 }
 
 /**
- * Add roles to inviter based on invites count
- * @param {import("discord.js").Guild} guild
- * @param {Object} inviterData
- * @param {boolean} isAdded
- */
-const checkInviteRewards = async (guild, inviterData = {}, isAdded) => {
-	const settings = await getSettings(guild);
-	if (settings.invite.ranks.length > 0 && inviterData?.member_id) {
-		const inviter = await guild.members.fetch(inviterData?.member_id).catch(() => {});
-		if (!inviter) return;
-
-		const invites = getEffectiveInvites(inviterData.invite_data);
-		settings.invite.ranks.forEach((reward) => {
-			if (isAdded) {
-				if (invites >= reward.invites && !inviter.roles.cache.has(reward._id)) {
-					inviter.roles.add(reward._id);
-				}
-			} else if (invites < reward.invites && inviter.roles.cache.has(reward._id)) {
-				inviter.roles.remove(reward._id);
-			}
-		});
-	}
-};
-
-/**
  * Track inviter by comparing new invites with cached invites
  * @param {import("discord.js").GuildMember} member
  */
@@ -113,8 +88,6 @@ async function trackJoinedMember(member) {
 		await inviterDb.save();
 		inviterData = inviterDb;
 	}
-
-	checkInviteRewards(guild, inviterData, true);
 	return inviterData;
 }
 
@@ -138,8 +111,6 @@ async function trackLeftMember(guild, user) {
 		await inviterDb.save();
 		inviterData = inviterDb;
 	}
-
-	checkInviteRewards(guild, inviterData, false);
 	return inviterData;
 }
 
@@ -149,7 +120,6 @@ module.exports = {
 	trackJoinedMember,
 	trackLeftMember,
 	cacheGuildInvites,
-	checkInviteRewards,
 	getEffectiveInvites,
 	cacheInvite,
 };

@@ -45,9 +45,6 @@ const Schema = new mongoose.Schema({
 			},
 		],
 	},
-	flag_translation: {
-		enabled: Boolean,
-	},
 	modlog_channel: String,
 	max_warn: {
 		action: {
