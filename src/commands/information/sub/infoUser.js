@@ -18,8 +18,7 @@ module.exports = (member) => {
 	let color = member.displayHexColor;
 	if (color === '#000000') color = EMBED_COLORS.BOT_EMBED;
 
-	let filteredRoles = member.roles.cache
-		.filter((r) => r.name !== '@everyone');
+	let filteredRoles = member.roles.cache.filter((r) => r.name !== '@everyone');
 	let rolesString = member.roles.cache
 		.filter((r) => r.name !== '@everyone')
 		.map((r) => r.toString())
@@ -68,6 +67,10 @@ module.exports = (member) => {
 				name: `Roles [${filteredRoles.size}]`,
 				value: rolesString,
 				inline: true,
+			},
+			{
+				name: 'use `!stats <user>` for rankingo info',
+				value: rolesString,
 			}
 			// {
 			// 	name: 'Avatar',
