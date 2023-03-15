@@ -10,15 +10,16 @@ module.exports = {
 	botPermissions: ['EmbedLinks'],
 	command: {
 		enabled: true,
+		usage: 'test',
 		subcommands: [
 			{
 				trigger: 'user',
-				description: 'get info for a user',
+				description: 'get info for a user by searching their name.\n' + 'methods: **@mention** | **nickname** | **ID**',
 			},
-			// {
-			// 	trigger: 'channel <channel>',
-			// 	description: 'test',
-			// },
+			{
+				trigger: 'channel <channel>',
+				description: 'test',
+			},
 		],
 	},
 

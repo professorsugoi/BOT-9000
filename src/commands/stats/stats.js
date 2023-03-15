@@ -59,18 +59,18 @@ async function stats(member, settings) {
 			{
 				name: '💬 Messages sent',
 				value: stripIndents`
-      ❯ Messages Sent: ${memberStats.messages}
-      ❯ Commands Used: ${memberStats.commands.prefix}
-      ❯ XP Earned: ${memberStats.xp}
-      ❯ Current Level: ${memberStats.level}
+      ▷ Messages Sent: ${memberStats.messages}
+      ▷ Commands Used: ${memberStats.commands.prefix}
+      ▷ XP Earned: ${memberStats.xp}
+      ▷ Current Level: ${memberStats.level}
     `,
 				inline: false,
 			},
 			{
 				name: '🎙️ Voice Stats',
 				value: stripIndents`
-      ❯ Total Connections: ${memberStats.voice.connections}
-      ❯ Time Spent: ${Math.floor(memberStats.voice.time / 60)} min
+      ▷ Total Connections: ${memberStats.voice.connections}
+      ▷ Time Spent: ${Math.floor(memberStats.voice.time / 60)} min
     `,
 			}
 		)

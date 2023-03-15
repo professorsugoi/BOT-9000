@@ -7,13 +7,12 @@ const {
 	Message,
 	ButtonBuilder,
 	CommandInteraction,
-	ApplicationCommandOptionType,
 	ButtonStyle,
 } = require('discord.js');
-const { getCommandUsage, getSlashUsage } = require('@handlers/command');
+const { getCommandUsage } = require('@handlers/command');
 
 const CMDS_PER_PAGE = 10;
-const IDLE_TIMEOUT = 60;
+const IDLE_TIMEOUT = 30;
 
 /**
  * @type {import("@structures/Command")}
@@ -26,17 +25,6 @@ module.exports = {
 	command: {
 		enabled: true,
 		usage: '!help',
-	},
-	slashCommand: {
-		enabled: true,
-		options: [
-			{
-				name: 'command',
-				description: 'name of the command',
-				required: false,
-				type: ApplicationCommandOptionType.String,
-			},
-		],
 	},
 
 	/////////////////PREFIX CMD/////////////////////////////////////////
@@ -59,28 +47,6 @@ module.exports = {
 
 		// No matching command/category found
 		await message.safeReply('No matching command found');
-	},
-
-	/////////////////SLASH CMD/////////////////////////////////////////
-	async interactionRun(interaction) {
-		let cmdName = interaction.options.getString('command');
-
-		// !help
-		if (!cmdName) {
-			const response = await getHelpMenu(interaction);
-			const sentMsg = await interaction.followUp(response);
-			return waiter(sentMsg, interaction.user.id);
-		}
-
-		// check if command help (!help cat)
-		const cmd = interaction.client.slashCommands.get(cmdName);
-		if (cmd) {
-			const embed = getSlashUsage(cmd);
-			return interaction.followUp({ embeds: [embed] });
-		}
-
-		// No matching command/category found
-		await interaction.followUp('No matching command found');
 	},
 };
 
@@ -120,11 +86,12 @@ async function getHelpMenu({ client, guild }) {
 		.setColor(EMBED_COLORS.BOT_EMBED)
 		.setThumbnail(client.user.displayAvatarURL())
 		.setDescription(
-			'**About:**\n' +
-				`Helo! I'm ${guild.members.me.displayName}!\n` +
-				'A custom bot for DEVILISH\n\n' +
-				`**Invite Me:** [Here](${client.getInvite()})\n` +
-				`**Support Server:** [Join](${SUPPORT_SERVER})`
+			'**Helo!**\n' +
+				`I'm **${guild.members.me.displayName}**,\n` +
+				`A custom bot for **${guild.name}**!\n\n` +
+				`Browse the commands below and don't forget to claim your \`!daily\` (人´∀\`) ~♪ `
+			// + `**Invite Me:** [Here](${client.getInvite()})\n` +
+			// `**Support Server:** [Join](${SUPPORT_SERVER})`
 		);
 
 	return {
@@ -158,7 +125,7 @@ const waiter = (msg, userId, prefix) => {
 		switch (response.customId) {
 			case 'help-menu': {
 				const cat = response.values[0].toUpperCase();
-				arrEmbeds = prefix ? getMsgCategoryEmbeds(msg.client, cat, prefix) : getSlashCategoryEmbeds(msg.client, cat);
+				arrEmbeds = getMsgCategoryEmbeds(msg.client, cat, prefix);
 				currentPage = 0;
 
 				// Buttons Row
@@ -190,89 +157,15 @@ const waiter = (msg, userId, prefix) => {
 
 	collector.on('end', () => {
 		if (!msg.guild || !msg.channel) return;
-		return msg.editable && msg.edit({ components: [] });
+		if (msg.editable) {
+			msg.edit({
+				content: 'Timed out (-_ゝ-) Z z z',
+				embeds: [],
+				components: [],
+			});
+		}
 	});
 };
-
-/**
- * Returns an array of message embeds for a particular command category [SLASH COMMANDS]
- * @param {BotClient} client
- * @param {string} category
- */
-function getSlashCategoryEmbeds(client, category) {
-	let collector = '';
-
-	// For IMAGE Category
-	if (category === 'IMAGE') {
-		client.slashCommands
-			.filter((cmd) => cmd.category === category)
-			.forEach((cmd) => (collector += `\`/${cmd.name}\`\n ❯ ${cmd.description}\n\n`));
-
-		const availableFilters = client.slashCommands
-			.get('filter')
-			.slashCommand.options[0].choices.map((ch) => ch.name)
-			.join(', ');
-
-		const availableGens = client.slashCommands
-			.get('generator')
-			.slashCommand.options[0].choices.map((ch) => ch.name)
-			.join(', ');
-
-		collector +=
-			'**Available Filters:**\n' + `${availableFilters}` + `*\n\n**Available Generators**\n` + `${availableGens}`;
-
-		const embed = new EmbedBuilder()
-			.setColor(EMBED_COLORS.BOT_EMBED)
-			.setThumbnail(CommandCategory[category]?.image)
-			.setAuthor({ name: `${category} Commands` })
-			.setDescription(collector);
-
-		return [embed];
-	}
-
-	// For REMAINING Categories
-	const commands = Array.from(client.slashCommands.filter((cmd) => cmd.category === category).values());
-
-	if (commands.length === 0) {
-		const embed = new EmbedBuilder()
-			.setColor(EMBED_COLORS.BOT_EMBED)
-			.setThumbnail(CommandCategory[category]?.image)
-			.setAuthor({ name: `${category} Commands` })
-			.setDescription('No commands in this category');
-
-		return [embed];
-	}
-
-	const arrSplitted = [];
-	const arrEmbeds = [];
-
-	while (commands.length) {
-		let toAdd = commands.splice(0, commands.length > CMDS_PER_PAGE ? CMDS_PER_PAGE : commands.length);
-
-		toAdd = toAdd.map((cmd) => {
-			const subCmds = cmd.slashCommand.options?.filter((opt) => opt.type === 'SUB_COMMAND');
-			const subCmdsString = subCmds?.map((s) => s.name).join(', ');
-
-			return `\`/${cmd.name}\`\n ❯ **Description**: ${cmd.description}\n ${
-				!subCmds?.length ? '' : `❯ **SubCommands [${subCmds?.length}]**: ${subCmdsString}\n`
-			} `;
-		});
-
-		arrSplitted.push(toAdd);
-	}
-
-	arrSplitted.forEach((item, index) => {
-		const embed = new EmbedBuilder()
-			.setColor(EMBED_COLORS.BOT_EMBED)
-			.setThumbnail(CommandCategory[category]?.image)
-			.setAuthor({ name: `${category} Commands` })
-			.setDescription(item.join('\n'))
-			.setFooter({ text: `page ${index + 1} of ${arrSplitted.length}` });
-		arrEmbeds.push(embed);
-	});
-
-	return arrEmbeds;
-}
 
 /**
  * Returns an array of message embeds for a particular command category [MESSAGE COMMANDS]
@@ -299,7 +192,7 @@ function getMsgCategoryEmbeds(client, category, prefix) {
 
 	while (commands.length) {
 		let toAdd = commands.splice(0, commands.length > CMDS_PER_PAGE ? CMDS_PER_PAGE : commands.length);
-		toAdd = toAdd.map((cmd) => `\`${prefix}${cmd.name}\`\n ❯ ${cmd.description}\n`);
+		toAdd = toAdd.map((cmd) => `\`${prefix}${cmd.name}\`\n ▷ ${cmd.description}\n`);
 		arrSplitted.push(toAdd);
 	}
 

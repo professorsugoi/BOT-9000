@@ -68,27 +68,27 @@ module.exports = (client) => {
 			{
 				name: 'CPU',
 				value: stripIndent`
-        ❯ **OS:** ${platform} [${architecture}]
-        ❯ **Cores:** ${cores}
-        ❯ **Usage:** ${cpuUsage}
+        ▷ **OS:** ${platform} [${architecture}]
+        ▷ **Cores:** ${cores}
+        ▷ **Usage:** ${cpuUsage}
         `,
 				inline: true,
 			},
 			{
 				name: "Bot's RAM",
 				value: stripIndent`
-        ❯ **Used:** ${botUsed}
-        ❯ **Available:** ${botAvailable}
-        ❯ **Usage:** ${botUsage}
+        ▷ **Used:** ${botUsed}
+        ▷ **Available:** ${botAvailable}
+        ▷ **Usage:** ${botUsage}
         `,
 				inline: true,
 			},
 			{
 				name: 'Overall RAM',
 				value: stripIndent`
-        ❯ **Used:** ${overallUsed}
-        ❯ **Available:** ${overallAvailable}
-        ❯ **Usage:** ${overallUsage}
+        ▷ **Used:** ${overallUsed}
+        ▷ **Available:** ${overallAvailable}
+        ▷ **Usage:** ${overallUsage}
         `,
 				inline: true,
 			},

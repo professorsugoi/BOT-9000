@@ -157,14 +157,15 @@ module.exports = {
 		let desc = '';
 		if (cmd.command.subcommands && cmd.command.subcommands.length > 0) {
 			cmd.command.subcommands.forEach((sub) => {
-				desc += `\`${prefix}${invoke || cmd.name} ${sub.trigger}\`\n❯ ${sub.description}\n\n`;
+				desc += `-----\n\`\`\`md\n${prefix}${invoke || cmd.name} ${sub.trigger}\`\`\`
+				▷ ${sub.description}\n\n`;
 			});
 			if (cmd.cooldown) {
 				desc += `**Cooldown:** ${timeformat(cmd.cooldown)}`;
 			}
 		} else {
-			desc += `\`\`\`css\n${prefix}${invoke || cmd.name} ${cmd.command.usage}\`\`\``;
-			if (cmd.description !== '') desc += `\n**Help:** ${cmd.description}`;
+			desc += `\`\`\`md\n${prefix}${invoke || cmd.name} ${cmd.command.usage}\`\`\``;
+			if (cmd.description !== '') desc += `\n▷ ${cmd.description}`;
 			if (cmd.cooldown) desc += `\n**Cooldown:** ${timeformat(cmd.cooldown)}`;
 		}
 

@@ -134,13 +134,13 @@ async function getStatus(settings, guild) {
 
 	// String Builder
 	let desc = stripIndent`
-    ❯ **Max Lines**: ${automod.max_lines || 'NA'}
-    ❯ **Anti-Massmention**: ${automod.anti_massmention > 0 ? '✓' : '✕'}
-    ❯ **Anti-Attachment**: ${automod.anti_attachment ? '✓' : '✕'}
-    ❯ **Anti-Links**: ${automod.anti_links ? '✓' : '✕'}
-    ❯ **Anti-Invites**: ${automod.anti_invites ? '✓' : '✕'}
-    ❯ **Anti-Spam**: ${automod.anti_spam ? '✓' : '✕'}
-    ❯ **Anti-Ghostping**: ${automod.anti_ghostping ? '✓' : '✕'}
+    ▷ **Max Lines**: ${automod.max_lines || 'NA'}
+    ▷ **Anti-Massmention**: ${automod.anti_massmention > 0 ? '✓' : '✕'}
+    ▷ **Anti-Attachment**: ${automod.anti_attachment ? '✓' : '✕'}
+    ▷ **Anti-Links**: ${automod.anti_links ? '✓' : '✕'}
+    ▷ **Anti-Invites**: ${automod.anti_invites ? '✓' : '✕'}
+    ▷ **Anti-Spam**: ${automod.anti_spam ? '✓' : '✕'}
+    ▷ **Anti-Ghostping**: ${automod.anti_ghostping ? '✓' : '✕'}
   `;
 
 	const embed = new EmbedBuilder()

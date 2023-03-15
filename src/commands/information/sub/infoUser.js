@@ -2,16 +2,6 @@ const { EmbedBuilder } = require('discord.js');
 const { EMBED_COLORS } = require('@root/config');
 
 /**
- * @type {import("@structures/Command")}
- */
-module.exports.info = {
-	name: 'user',
-	description: 'shows information about a user',
-	usage: '[@member|id]',
-	aliases: ['uinfo', 'memberinfo'],
-};
-
-/**
  * @param {import('discord.js').GuildMember} member
  */
 module.exports = (member) => {
