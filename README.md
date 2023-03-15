@@ -1,4 +1,5 @@
-cloned bot i gutted
+custom bot for DEVILISH server  
+⚠ code status: spaghetti ⚠
 
 ## DOCS
 
@@ -6,8 +7,8 @@ cloned bot i gutted
 
 ## IMPORTANT
 
-- manage default permissions/security
-- default bot settings from config
+- default permissions
+- proxy request
 
 ## TO DO
 
@@ -19,11 +20,33 @@ cloned bot i gutted
 - modlogs
 - `@napi-rs/canvas` for rank cards
 - clean up `!rep view`, `!daily`
-- add rep count to !stats card
-- rm/merge ton of setup commands for greeting config
+- add rep count to !stats card (?)
+- streamline setup commands
+
+## CLEANUP
+
+_gutting slash cmds created a big mess. this is a list to go through it all and get them working again_
+
+- [ ] slash_help
+- [ ] /admin
+- [ ] /giveaways
+- [ ] /information
+  - [x] info
+  - [ ] infoAvatar
+  - [ ] infoBot
+  - [ ] infoBotstats
+  - [ ] infoChannel
+  - [ ] infoEmoji
+  - [ ] infoUptime
+  - [x] infoUser
+- [ ] /moderation
+- [ ] /owner
+- [ ] /social
+- [ ] /stats
+- [ ] /utility
 
 ## RESOURCES
 
-- [https://github.com/saiteja-madha/discord-js-bot](cloned repo source)
-- [https://autocode.com/tools/discord/embed-builder](embed builder)
-- [https://github.com/discordjs/guide](discordjs guide)
+- [original repo (by saiteja-madha)](https://github.com/saiteja-madha/discord-js-bot) - comes with awesome utilities right out of the box! (ie. safeSend, resolveMember). at this point the repo i cloned is nearly unrecognizeable, so i highly suggest you go check out the original for a fully featured bot.
+- [embed builder](https://autocode.com/tools/discord/embed-builder) - closely resembles djs' [embed constructor](https://discordjs.guide/popular-topics/embeds.html#embed-preview)
+- [discord.js docs](https://github.com/discordjs/guide)
