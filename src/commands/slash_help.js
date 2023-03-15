@@ -20,12 +20,12 @@ const IDLE_TIMEOUT = 60;
  */
 module.exports = {
 	name: 'help',
-	description: 'command help menu',
+	description: 'shows available commands',
 	category: 'UTILITY',
 	botPermissions: ['EmbedLinks'],
 	command: {
 		enabled: true,
-		usage: '[command]',
+		usage: '!help',
 	},
 	slashCommand: {
 		enabled: true,
@@ -39,6 +39,7 @@ module.exports = {
 		],
 	},
 
+	/////////////////PREFIX CMD/////////////////////////////////////////
 	async messageRun(message, args, data) {
 		let trigger = args[0];
 
@@ -60,6 +61,7 @@ module.exports = {
 		await message.safeReply('No matching command found');
 	},
 
+	/////////////////SLASH CMD/////////////////////////////////////////
 	async interactionRun(interaction) {
 		let cmdName = interaction.options.getString('command');
 

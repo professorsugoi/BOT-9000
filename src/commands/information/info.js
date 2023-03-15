@@ -1,4 +1,4 @@
-const infoUser = require('./sub');
+const infoUser = require('./sub/infoUser.js');
 
 /**
  * @type {import("@structures/Command")}
@@ -23,7 +23,7 @@ module.exports = {
 	},
 
 	async messageRun(message, args) {
-		const sub = args[0].toLowerCase();
+		const sub = args[0];
 		if (!sub) return message.safeReply('Use `!info [query]` to get information about a query.');
 
 		let response;

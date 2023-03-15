@@ -69,8 +69,8 @@ module.exports = (member) => {
 				inline: true,
 			},
 			{
-				name: 'use `!stats <user>` for rankingo info',
-				value: rolesString,
+				name: '---',
+				value: 'use `!stats <user>` for ranking info',
 			}
 			// {
 			// 	name: 'Avatar',

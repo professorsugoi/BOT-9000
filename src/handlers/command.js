@@ -199,4 +199,3 @@ function getRemainingCooldown(memberId, cmd) {
 	}
 	return 0;
 }
-

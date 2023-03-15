@@ -13,7 +13,7 @@ module.exports = async (client, message) => {
 	let isCommand = false;
 	// check for bot mentions
 	if (message.content.includes(`${client.user.id}`)) {
-		message.channel.safeSend(`> My prefix is \`${settings.prefix}\`. Use \`!help\` for a list of commands.`);
+		message.channel.safeSend(`> My prefix is \`${settings.prefix}\`. Use \`/help\` for a list of commands.`);
 	}
 
 	if (message.content && message.content.startsWith(settings.prefix)) {
@@ -23,7 +23,10 @@ module.exports = async (client, message) => {
 			isCommand = true;
 			commandHandler.handlePrefixCommand(message, cmd, settings);
 		} else if (invoke.length > 0) {
-			message.channel.safeSend(`\`!${invoke}\` is not a valid command. Use \`!help\` for a list of commands.`);
+			// If the command does not exist and has at least one character following the prefix, send the error response
+			message.channel.safeSend(
+				`\`!${invoke}\` is not a valid command.\n Use \`!help\` for a list of available commands.`
+			);
 		}
 	}
 
