@@ -8,7 +8,7 @@ const { getMemberStats, getXpLb } = require('@schemas/MemberStats');
  */
 module.exports = {
 	name: 'rank',
-	description: 'displays members rank in this server',
+	description: 'Displays members rank in this server',
 	cooldown: 5,
 	category: 'STATS',
 	botPermissions: ['AttachFiles'],

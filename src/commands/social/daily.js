@@ -12,7 +12,7 @@ module.exports = {
 	category: 'SOCIAL',
 	command: {
 		enabled: true,
-		usage: '!daily',
+		usage: '',
 		aliases: ['d'],
 	},
 

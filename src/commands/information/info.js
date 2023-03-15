@@ -5,20 +5,24 @@ const infoUser = require('./sub/infoUser.js');
  */
 module.exports = {
 	name: 'info',
-	description: 'show various information',
+	description: 'Show various information',
 	category: 'INFORMATION',
 	botPermissions: ['EmbedLinks'],
 	command: {
 		enabled: true,
-		usage: 'test',
+		usage: '',
 		subcommands: [
 			{
-				trigger: 'user',
-				description: 'get info for a user by searching their name.\n' + 'methods: **@mention** | **nickname** | **ID**',
+				trigger: '<user>',
+				description: 'Get info for a user by searching their name.\n' + 'methods: **@mention** | **nickname** | **ID**',
 			},
 			{
-				trigger: 'channel <channel>',
-				description: 'test',
+				trigger: '[#channel]',
+				description: 'Get info for a channel.',
+			},
+			{
+				trigger: 'server' || 'guild',
+				description: 'Get info for the server.',
 			},
 		],
 	},

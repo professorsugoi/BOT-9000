@@ -8,7 +8,7 @@ const { stripIndent } = require('common-tags');
  */
 module.exports = {
 	name: 'github',
-	description: 'shows github statistics of a user',
+	description: 'Shows github statistics of a user',
 	cooldown: 10,
 	category: 'UTILITY',
 	botPermissions: ['EmbedLinks'],
@@ -85,3 +85,4 @@ async function getGithubUser(target, author) {
 
 	return { embeds: [embed] };
 }
+

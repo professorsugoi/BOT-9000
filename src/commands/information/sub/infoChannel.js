@@ -7,16 +7,6 @@ const channelTypes = require('@helpers/channelTypes');
  * @type {import("@structures/Command")}
  */
 module.exports = {
-	name: 'channelinfo',
-	description: 'shows information about a channel',
-	category: 'INFORMATION',
-	botPermissions: ['EmbedLinks'],
-	command: {
-		enabled: true,
-		usage: '[#channel|id]',
-		aliases: ['chinfo'],
-	},
-
 	async messageRun(message, args) {
 		let targetChannel;
 
@@ -35,7 +25,7 @@ module.exports = {
 			targetChannel = message.channel;
 		}
 
-		const response = channelInfo(targetChannel);
+		const response = infoChannel(targetChannel);
 		await message.safeReply(response);
 	},
 };

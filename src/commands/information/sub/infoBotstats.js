@@ -12,18 +12,8 @@ const { stripIndent } = require('common-tags');
  * @type {import("@structures/Command")}
  */
 module.exports = {
-	name: 'botstats',
-	description: 'shows bot information',
-	category: 'INFORMATION',
-	botPermissions: ['EmbedLinks'],
-	cooldown: 5,
-	command: {
-		enabled: true,
-		aliases: ['botstat', 'botinfo'],
-	},
-
 	async messageRun(message, args) {
-		const response = botstats(message.client);
+		const response = infoBotstats(message.client);
 		await message.safeReply(response);
 	},
 };

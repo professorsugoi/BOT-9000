@@ -8,14 +8,14 @@ const { getReputationLb } = require('@schemas/User');
  */
 module.exports = {
 	name: 'leaderboard',
-	description: 'display the XP leaderboard',
+	description: 'Display a leaderboard',
 	category: 'INFORMATION',
 	botPermissions: ['EmbedLinks'],
 	command: {
 		enabled: true,
 		aliases: ['lb'],
 		minArgsCount: 1,
-		usage: '<xp|invite|rep>',
+		usage: '<xp|rep>',
 	},
 
 	async messageRun(message, args, data) {

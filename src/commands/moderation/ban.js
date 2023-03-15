@@ -5,7 +5,7 @@ const { banTarget } = require('@helpers/ModUtils');
  */
 module.exports = {
 	name: 'ban',
-	description: 'bans the specified member',
+	description: 'Bans the specified member',
 	category: 'MODERATION',
 	botPermissions: ['BanMembers'],
 	userPermissions: ['BanMembers'],

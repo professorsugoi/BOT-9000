@@ -3,13 +3,15 @@
  */
 module.exports = {
 	name: 'ping',
-	description: 'shows the current ping from the bot to the discord servers',
+	description: 'Shows current ping from the bot to server',
 	category: 'INFORMATION',
 	command: {
 		enabled: true,
+		usage: '',
 	},
 
 	async messageRun(message) {
 		await message.safeReply(`🏓 Pong : \`${Math.floor(message.client.ws.ping)}ms\``);
 	},
 };
+

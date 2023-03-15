@@ -19,12 +19,12 @@ const IDLE_TIMEOUT = 30;
  */
 module.exports = {
 	name: 'help',
-	description: 'shows available commands',
+	description: 'Shows available commands without arg. shows command usage with arg.',
 	category: 'UTILITY',
 	botPermissions: ['EmbedLinks'],
 	command: {
 		enabled: true,
-		usage: '!help',
+		usage: '<arg>',
 	},
 
 	/////////////////PREFIX CMD/////////////////////////////////////////

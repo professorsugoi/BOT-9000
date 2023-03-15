@@ -27,7 +27,8 @@ custom bot for DEVILISH server
 
 _gutting slash cmds created a big mess. this is a list to go through it all and get them working again_
 
-- [ ] slash_help
+- [x] help
+- [x] ping
 - [ ] /admin
 - [ ] /giveaways
 - [ ] /information

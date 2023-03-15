@@ -17,11 +17,11 @@ module.exports = {
 		aliases: ['reputation'],
 		subcommands: [
 			{
-				trigger: 'view [user]',
+				trigger: 'view <user>',
 				description: 'view reputation for a user',
 			},
 			{
-				trigger: 'give [user]',
+				trigger: 'give <user>',
 				description: 'give reputation to a user',
 			},
 		],
