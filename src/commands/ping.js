@@ -9,12 +9,7 @@ module.exports = {
 		enabled: true,
 	},
 
-	async messageRun(message, args) {
+	async messageRun(message) {
 		await message.safeReply(`🏓 Pong : \`${Math.floor(message.client.ws.ping)}ms\``);
 	},
-
-	async interactionRun(interaction) {
-		await interaction.followUp(`🏓 Pong : \`${Math.floor(interaction.client.ws.ping)}ms\``);
-	},
 };
-

@@ -1,5 +1,28 @@
 const { EmbedBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle } = require('discord.js');
-const { EMBED_COLORS, SUPPORT_SERVER, DASHBOARD } = require('@root/config');
+const { EMBED_COLORS, SUPPORT_SERVER } = require('@root/config');
+
+/**
+ * @type {import("@structures/Command")}
+ */
+module.exports = {
+	name: 'botinvite',
+	description: 'gives you bot invite',
+	category: 'INFORMATION',
+	botPermissions: ['EmbedLinks'],
+	command: {
+		enabled: true,
+	},
+
+	async messageRun(message, args) {
+		const response = botinvite(message.client);
+		try {
+			await message.author.send(response);
+			return message.safeReply('Check your DM for my information! :envelope_with_arrow:');
+		} catch (ex) {
+			return message.safeReply('I cannot send you my information! Is your DM open?');
+		}
+	},
+};
 
 module.exports = (client) => {
 	const embed = new EmbedBuilder()
@@ -14,12 +37,6 @@ module.exports = (client) => {
 
 	if (SUPPORT_SERVER) {
 		components.push(new ButtonBuilder().setLabel('Support Server').setURL(SUPPORT_SERVER).setStyle(ButtonStyle.Link));
-	}
-
-	if (DASHBOARD.enabled) {
-		components.push(
-			new ButtonBuilder().setLabel('Dashboard Link').setURL(DASHBOARD.baseURL).setStyle(ButtonStyle.Link)
-		);
 	}
 
 	let buttonsRow = new ActionRowBuilder().addComponents(components);

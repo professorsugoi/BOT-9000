@@ -49,20 +49,27 @@ module.exports = {
 		const input = args[0].toLowerCase();
 		const settings = data.settings;
 
+		// status
 		let response;
 		if (input === 'status') {
 			response = await getStatus(settings, message.guild);
+
+			// strikees
 		} else if (input === 'strikes') {
 			const strikes = args[1];
 			if (isNaN(strikes) || Number.parseInt(strikes) < 1) {
 				return message.safeReply('Strikes must be a valid number greater than 0');
 			}
 			response = await setStrikes(settings, strikes);
+
+			// action
 		} else if (input === 'action') {
 			const action = args[1].toUpperCase();
 			if (!action || !['TIMEOUT', 'KICK', 'BAN'].includes(action))
 				return message.safeReply('Not a valid action. Action can be `Timeout`/`Kick`/`Ban`');
 			response = await setAction(settings, message.guild, action);
+
+			// debug
 		} else if (input === 'debug') {
 			const status = args[1].toLowerCase();
 			if (!['on', 'off'].includes(status)) return message.safeReply('Invalid status. Value must be `on/off`');

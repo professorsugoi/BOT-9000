@@ -85,4 +85,3 @@ async function getGithubUser(target, author) {
 
 	return { embeds: [embed] };
 }
-

@@ -317,7 +317,7 @@ module.exports = class BotClient extends Client {
 				'EmbedLinks',
 				'KickMembers',
 				'ManageChannels',
-				'ManageGuild',
+				// 'ManageGuild',
 				'ManageMessages',
 				'ManageNicknames',
 				'ManageRoles',

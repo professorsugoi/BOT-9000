@@ -7,12 +7,13 @@ const {
 	Message,
 	ButtonBuilder,
 	CommandInteraction,
+	ApplicationCommandOptionType,
 	ButtonStyle,
 } = require('discord.js');
-const { getCommandUsage } = require('@handlers/command');
+const { getCommandUsage, getSlashUsage } = require('@handlers/command');
 
-const CMDS_PER_PAGE = 5;
-const IDLE_TIMEOUT = 30;
+const CMDS_PER_PAGE = 10;
+const IDLE_TIMEOUT = 60;
 
 /**
  * @type {import("@structures/Command")}
@@ -25,6 +26,17 @@ module.exports = {
 	command: {
 		enabled: true,
 		usage: '[command]',
+	},
+	slashCommand: {
+		enabled: true,
+		options: [
+			{
+				name: 'command',
+				description: 'name of the command',
+				required: false,
+				type: ApplicationCommandOptionType.String,
+			},
+		],
 	},
 
 	async messageRun(message, args, data) {
@@ -56,6 +68,13 @@ module.exports = {
 			const response = await getHelpMenu(interaction);
 			const sentMsg = await interaction.followUp(response);
 			return waiter(sentMsg, interaction.user.id);
+		}
+
+		// check if command help (!help cat)
+		const cmd = interaction.client.slashCommands.get(cmdName);
+		if (cmd) {
+			const embed = getSlashUsage(cmd);
+			return interaction.followUp({ embeds: [embed] });
 		}
 
 		// No matching command/category found
@@ -99,9 +118,9 @@ async function getHelpMenu({ client, guild }) {
 		.setColor(EMBED_COLORS.BOT_EMBED)
 		.setThumbnail(client.user.displayAvatarURL())
 		.setDescription(
-			'**About Me:**\n' +
-				`I'm ${guild.members.me.displayName}!\n` +
-				'A bot for silly things.\n\n' +
+			'**About:**\n' +
+				`Helo! I'm ${guild.members.me.displayName}!\n` +
+				'A custom bot for DEVILISH\n\n' +
 				`**Invite Me:** [Here](${client.getInvite()})\n` +
 				`**Support Server:** [Join](${SUPPORT_SERVER})`
 		);
@@ -260,35 +279,7 @@ function getSlashCategoryEmbeds(client, category) {
  * @param {string} prefix
  */
 function getMsgCategoryEmbeds(client, category, prefix) {
-	let collector = '';
-
-	// For IMAGE Category
-	if (category === 'IMAGE') {
-		client.commands
-			.filter((cmd) => cmd.category === category)
-			.forEach((cmd) =>
-				cmd.command.aliases.forEach((alias) => {
-					collector += `\`${alias}\`, `;
-				})
-			);
-
-		collector +=
-			'\n\nYou can use these image commands in following formats\n' +
-			`**${prefix}cmd:** Picks message authors avatar as image\n` +
-			`**${prefix}cmd <@member>:** Picks mentioned members avatar as image\n` +
-			`**${prefix}cmd <url>:** Picks image from provided URL\n` +
-			`**${prefix}cmd [attachment]:** Picks attachment image`;
-
-		const embed = new EmbedBuilder()
-			.setColor(EMBED_COLORS.BOT_EMBED)
-			.setThumbnail(CommandCategory[category]?.image)
-			.setAuthor({ name: `${category} Commands` })
-			.setDescription(collector);
-
-		return [embed];
-	}
-
-	// For REMAINING Categories
+	// For ALL Categories
 	const commands = client.commands.filter((cmd) => cmd.category === category);
 
 	if (commands.length === 0) {
@@ -324,4 +315,3 @@ function getMsgCategoryEmbeds(client, category, prefix) {
 
 	return arrEmbeds;
 }
-

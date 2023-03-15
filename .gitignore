@@ -11,9 +11,6 @@ pnpm-debug.log*
 .eslintrc.json
 logs/
 
-# misc
-dashboard/
-
 # environment variables
 .env
 .env.production

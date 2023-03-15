@@ -64,11 +64,43 @@ module.exports = {
 		minArgsCount: 0,
 		subcommands: [],
 	},
-	slashCommand: {
-		enabled: true,
-		ephemeral: false,
-		options: [],
-	},
 	messageRun: (message, args, data) => {},
-	interactionRun: (interaction, data) => {},
 };
+
+/**
+ * Subcommands
+ * @type {CommandData}
+ */
+module.exports = {
+	name: '',
+	description: '',
+	usage: '',
+	minArgsCount: 0,
+	messageRun: (message, args, data) => {},
+};
+// previous command structure (prefix AND slash)
+////
+// module.exports = {
+// 	name: '',
+// 	description: '',
+// 	cooldown: 0,
+// 	category: 'NONE',
+// 	botPermissions: [],
+// 	userPermissions: [],
+// 	validations: [],
+// 	command: {
+// 		enabled: true,
+// 		aliases: [],
+// 		usage: '',
+// 		minArgsCount: 0,
+// 		subcommands: [],
+// 	},
+// 	slashCommand: {
+// 		enabled: true,
+// 		ephemeral: false,
+// 		options: [],
+// 	},
+// 	messageRun: (message, args, data) => {},
+// 	interactionRun: (interaction, data) => {},
+// };
+

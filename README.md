@@ -7,6 +7,7 @@ cloned bot i gutted
 ## IMPORTANT
 
 - manage default permissions/security
+- default bot settings from config
 
 ## TO DO
 
@@ -14,7 +15,7 @@ cloned bot i gutted
   - edit `inviter.js`, `invite.js`, `greetings.js`, ~~member.js schema~~
 - ~~prefix commands~~
 - leveling/rep gain adjustments
-- badges
+- badges system & database
 - modlogs
 - `@napi-rs/canvas` for rank cards
 - clean up `!rep view`, `!daily`
@@ -23,7 +24,6 @@ cloned bot i gutted
 
 ## RESOURCES
 
-- [https://github.com/saiteja-madha/discord-js-bot](Saiteja-madha Template)
+- [https://github.com/saiteja-madha/discord-js-bot](cloned repo source)
 - [https://autocode.com/tools/discord/embed-builder](embed builder)
 - [https://github.com/discordjs/guide](discordjs guide)
-- [https://github.com/TFAGaming/DiscordJS-V14-Bot-Template](TFAGaming Template)
