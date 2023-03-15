@@ -24,12 +24,6 @@ module.exports = {
 		const response = await getGithubUser(username, message.author);
 		await message.safeReply(response);
 	},
-
-	async interactionRun(interaction) {
-		const username = interaction.options.getString('username');
-		const response = await getGithubUser(username, interaction.user);
-		await interaction.followUp(response);
-	},
 };
 
 const websiteProvided = (text) => (text.startsWith('http://') ? true : text.startsWith('https://'));

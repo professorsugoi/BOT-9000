@@ -46,14 +46,6 @@ module.exports = {
 			return message.safeReply(response);
 		}
 	},
-
-	async interactionRun(interaction) {
-		const name = interaction.options.getString('name');
-		const target = await interaction.guild.members.fetch(interaction.options.getUser('user'));
-
-		const response = await nickname(interaction, target, name);
-		await interaction.followUp(response);
-	},
 };
 
 async function nickname({ member, guild }, target, name) {

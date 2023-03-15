@@ -23,15 +23,6 @@ module.exports = {
 		const response = await untimeout(message.member, target, reason);
 		await message.safeReply(response);
 	},
-
-	async interactionRun(interaction) {
-		const user = interaction.options.getUser('user');
-		const reason = interaction.options.getString('reason');
-		const target = await interaction.guild.members.fetch(user.id);
-
-		const response = await untimeout(interaction.member, target, reason);
-		await interaction.followUp(response);
-	},
 };
 
 async function untimeout(issuer, target, reason) {

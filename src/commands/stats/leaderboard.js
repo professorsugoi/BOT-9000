@@ -27,17 +27,6 @@ module.exports = {
 		else response = 'Invalid Leaderboard type. Choose either `xp` or `rep`';
 		await message.safeReply(response);
 	},
-
-	async interactionRun(interaction, data) {
-		const type = interaction.options.getString('type');
-		let response;
-
-		if (type === 'xp') response = await getXpLeaderboard(interaction, interaction.user, data.settings);
-		else if (type === 'rep') response = await getRepLeaderboard(interaction.user);
-		else response = 'Invalid Leaderboard type. Choose either `xp` or `rep`';
-
-		await interaction.followUp(response);
-	},
 };
 
 async function getXpLeaderboard({ guild }, author, settings) {

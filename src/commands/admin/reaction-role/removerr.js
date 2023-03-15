@@ -26,14 +26,6 @@ module.exports = {
 
 		await message.safeReply(response);
 	},
-
-	async interactionRun(interaction) {
-		const targetChannel = interaction.options.getChannel('channel');
-		const messageId = interaction.options.getString('message_id');
-
-		const response = await removeRR(interaction.guild, targetChannel, messageId);
-		await interaction.followUp(response);
-	},
 };
 
 async function removeRR(guild, channel, messageId) {

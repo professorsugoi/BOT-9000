@@ -29,21 +29,6 @@ module.exports = {
 		const response = await timeout(message.member, target, ms, reason);
 		await message.safeReply(response);
 	},
-
-	async interactionRun(interaction) {
-		const user = interaction.options.getUser('user');
-
-		// parse time
-		const duration = interaction.options.getString('duration');
-		const ms = ems(duration);
-		if (!ms) return interaction.followUp('Please provide a valid duration. Example: 1d/1h/1m/1s');
-
-		const reason = interaction.options.getString('reason');
-		const target = await interaction.guild.members.fetch(user.id);
-
-		const response = await timeout(interaction.member, target, ms, reason);
-		await interaction.followUp(response);
-	},
 };
 
 async function timeout(issuer, target, ms, reason) {

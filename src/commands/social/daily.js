@@ -21,12 +21,6 @@ module.exports = {
 		const response = await claimDaily(user);
 		await message.safeReply(response);
 	},
-
-	async interactionRun(interaction) {
-		const user = interaction.user;
-		const response = await claimDaily(user);
-		await interaction.followUp(response);
-	},
 };
 
 async function claimDaily(user) {

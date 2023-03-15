@@ -19,11 +19,6 @@ module.exports = {
 		const response = await setStatus(input, data.settings);
 		return message.safeReply(response);
 	},
-
-	async interactionRun(interaction, data) {
-		const response = await setStatus(interaction.options.getString('status'), data.settings);
-		await interaction.followUp(response);
-	},
 };
 
 async function setStatus(input, settings) {

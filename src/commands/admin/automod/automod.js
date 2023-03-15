@@ -99,30 +99,6 @@ module.exports = {
 		else response = 'Invalid command usage!';
 		await message.safeReply(response);
 	},
-
-	async interactionRun(interaction, data) {
-		const sub = interaction.options.getSubcommand();
-		const settings = data.settings;
-
-		let response;
-
-		if (sub === 'status') response = await getStatus(settings, interaction.guild);
-		else if (sub === 'strikes') response = await setStrikes(settings, interaction.options.getInteger('amount'));
-		else if (sub === 'action')
-			response = await setAction(settings, interaction.guild, interaction.options.getString('action'));
-		else if (sub === 'debug') response = await setDebug(settings, interaction.options.getString('status'));
-		else if (sub === 'whitelist') {
-			response = getWhitelist(interaction.guild, settings);
-		} else if (sub === 'whitelistadd') {
-			const channelId = interaction.options.getChannel('channel').id;
-			response = await whiteListAdd(settings, channelId);
-		} else if (sub === 'whitelistremove') {
-			const channelId = interaction.options.getChannel('channel').id;
-			response = await whiteListRemove(settings, channelId);
-		}
-
-		await interaction.followUp(response);
-	},
 };
 
 async function getStatus(settings, guild) {

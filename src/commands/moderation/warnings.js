@@ -49,31 +49,6 @@ module.exports = {
 
 		await message.safeReply(response);
 	},
-
-	async interactionRun(interaction) {
-		const sub = interaction.options.getSubcommand();
-		let response = '';
-
-		if (sub === 'list') {
-			const user = interaction.options.getUser('user');
-			const target = (await interaction.guild.members.fetch(user.id)) || interaction.member;
-			response = await listWarnings(target, interaction);
-		}
-
-		//
-		else if (sub === 'clear') {
-			const user = interaction.options.getUser('user');
-			const target = await interaction.guild.members.fetch(user.id);
-			response = await clearWarnings(target, interaction);
-		}
-
-		// else
-		else {
-			response = `Invalid subcommand ${sub}`;
-		}
-
-		await interaction.followUp(response);
-	},
 };
 
 async function listWarnings(target, { guildId }) {

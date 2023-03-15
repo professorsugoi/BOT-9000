@@ -26,40 +26,10 @@ module.exports = {
 
 		await message.safeReply(response);
 	},
-
-	async interactionRun(interaction, data) {
-		const sub = interaction.options.getSubcommand();
-		let response;
-
-		// add
-		if (sub === 'add') {
-			let role = interaction.options.getRole('role');
-			if (!role) {
-				const role_id = interaction.options.getString('role_id');
-				if (!role_id) return interaction.followUp('Please provide a role or role id');
-
-				const roles = interaction.guild.findMatchingRoles(role_id);
-				if (roles.length === 0) return interaction.followUp('No matching roles found matching your query');
-				role = roles[0];
-			}
-
-			response = await setAutoRole(interaction, role, data.settings);
-		}
-
-		// remove
-		else if (sub === 'remove') {
-			response = await setAutoRole(interaction, null, data.settings);
-		}
-
-		// default
-		else response = 'Invalid subcommand';
-
-		await interaction.followUp(response);
-	},
 };
 
 /**
- * @param {import("discord.js").Message | import("discord.js").CommandInteraction} message
+ * @param {import("discord.js").Message} message
  * @param {import("discord.js").Role} role
  * @param {import("@models/Guild")} settings
  */

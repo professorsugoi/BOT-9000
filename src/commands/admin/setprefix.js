@@ -17,11 +17,6 @@ module.exports = {
 		const response = await setNewPrefix(newPrefix, data.settings);
 		await message.safeReply(response);
 	},
-
-	async interactionRun(interaction, data) {
-		const response = await setNewPrefix(interaction.options.getString('newprefix'), data.settings);
-		await interaction.followUp(response);
-	},
 };
 
 async function setNewPrefix(newPrefix, settings) {

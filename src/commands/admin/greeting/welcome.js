@@ -112,51 +112,6 @@ module.exports = {
 		else response = 'Invalid command usage!';
 		return message.safeReply(response);
 	},
-
-	async interactionRun(interaction, data) {
-		const sub = interaction.options.getSubcommand();
-		const settings = data.settings;
-
-		let response;
-		switch (sub) {
-			case 'preview':
-				response = await sendPreview(settings, interaction.member);
-				break;
-
-			case 'status':
-				response = await setStatus(settings, interaction.options.getString('status'));
-				break;
-
-			case 'channel':
-				response = await setChannel(settings, interaction.options.getChannel('channel'));
-				break;
-
-			case 'desc':
-				response = await setDescription(settings, interaction.options.getString('content'));
-				break;
-
-			case 'thumbnail':
-				response = await setThumbnail(settings, interaction.options.getString('status'));
-				break;
-
-			case 'color':
-				response = await setColor(settings, interaction.options.getString('color'));
-				break;
-
-			case 'footer':
-				response = await setFooter(settings, interaction.options.getString('content'));
-				break;
-
-			case 'image':
-				response = await setImage(settings, interaction.options.getString('url'));
-				break;
-
-			default:
-				response = 'Invalid subcommand';
-		}
-
-		return interaction.followUp(response);
-	},
 };
 
 async function sendPreview(settings, member) {

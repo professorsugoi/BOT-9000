@@ -33,13 +33,13 @@ _gutting slash cmds created a big mess. this is a list to go through it all and 
 - [ ] /giveaways
 - [ ] /information
   - [x] info
-  - [ ] infoAvatar
   - [ ] infoBot
   - [ ] infoBotstats
   - [ ] infoChannel
   - [ ] infoEmoji
-  - [ ] infoUptime
   - [x] infoUser
+  - [ ] avatar <-- fix img gen
+  - [x] uptime
 - [ ] /moderation
 - [ ] /owner
 - [ ] /social

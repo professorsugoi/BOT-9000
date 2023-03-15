@@ -24,15 +24,6 @@ module.exports = {
 		const sent = await message.safeReply(response);
 		if (typeof response !== 'string') await waitForBan(message.member, reason, sent);
 	},
-
-	async interactionRun(interaction) {
-		const match = interaction.options.getString('name');
-		const reason = interaction.options.getString('reason');
-
-		const response = await getMatchingBans(interaction.guild, match);
-		const sent = await interaction.followUp(response);
-		if (typeof response !== 'string') await waitForBan(interaction.member, reason, sent);
-	},
 };
 
 /**

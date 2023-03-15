@@ -55,25 +55,6 @@ module.exports = {
 
 		await message.safeReply(response);
 	},
-
-	async interactionRun(interaction) {
-		const sub = interaction.options.getSubcommand();
-		let response;
-
-		// status
-		if (sub === 'view' || sub === 'v') {
-			const target = interaction.options.getUser('user') || interaction.user;
-			response = await viewReputation(target);
-		}
-
-		// give
-		if (sub === 'give' || sub === 'g') {
-			const target = interaction.options.getUser('user');
-			response = await giveReputation(interaction.user, target);
-		}
-
-		await interaction.followUp(response);
-	},
 };
 
 async function viewReputation(target) {

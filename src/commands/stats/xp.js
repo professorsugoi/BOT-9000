@@ -50,17 +50,6 @@ module.exports = {
 		else response = 'Invalid subcommand';
 		await message.safeReply(response);
 	},
-
-	async interactionRun(interaction, data) {
-		const sub = interaction.options.getSubcommand();
-		let response;
-
-		if (sub === 'message') response = await setMessage(interaction.options.getString('message'), data.settings);
-		else if (sub === 'channel') response = await setChannel(interaction.options.getChannel('channel'), data.settings);
-		else response = 'Invalid subcommand';
-
-		await interaction.followUp(response);
-	},
 };
 
 async function setMessage(message, settings) {

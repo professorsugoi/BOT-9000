@@ -23,14 +23,6 @@ module.exports = {
 		const response = await ban(message.member, target, reason);
 		await message.safeReply(response);
 	},
-
-	async interactionRun(interaction) {
-		const target = interaction.options.getUser('user');
-		const reason = interaction.options.getString('reason');
-
-		const response = await ban(interaction.member, target, reason);
-		await interaction.followUp(response);
-	},
 };
 
 /**

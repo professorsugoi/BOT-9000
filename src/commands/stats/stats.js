@@ -21,12 +21,6 @@ module.exports = {
 		const response = await stats(target, data.settings);
 		await message.safeReply(response);
 	},
-
-	async interactionRun(interaction, data) {
-		const member = interaction.options.getMember('user') || interaction.member;
-		const response = await stats(member, data.settings);
-		await interaction.followUp(response);
-	},
 };
 
 /**

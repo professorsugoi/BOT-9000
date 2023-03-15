@@ -55,24 +55,6 @@ module.exports = {
 		else response = 'Invalid command usage!';
 		await message.safeReply(response);
 	},
-
-	async interactionRun(interaction, data) {
-		const sub = interaction.options.getSubcommand();
-		const settings = data.settings;
-
-		let response;
-		if (sub == 'ghostping') response = await antiGhostPing(settings, interaction.options.getString('status'));
-		else if (sub == 'spam') response = await antiSpam(settings, interaction.options.getString('status'));
-		else if (sub === 'massmention') {
-			response = await antiMassMention(
-				settings,
-				interaction.options.getString('status'),
-				interaction.options.getInteger('amount')
-			);
-		} else response = 'Invalid command usage!';
-
-		await interaction.followUp(response);
-	},
 };
 
 async function antiGhostPing(settings, input) {

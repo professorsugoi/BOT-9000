@@ -32,16 +32,6 @@ module.exports = {
 		const response = await addRR(message.guild, targetChannel[0], targetMessage, reaction, role);
 		await message.safeReply(response);
 	},
-
-	async interactionRun(interaction) {
-		const targetChannel = interaction.options.getChannel('channel');
-		const messageId = interaction.options.getString('message_id');
-		const reaction = interaction.options.getString('emoji');
-		const role = interaction.options.getRole('role');
-
-		const response = await addRR(interaction.guild, targetChannel, messageId, reaction, role);
-		await interaction.followUp(response);
-	},
 };
 
 async function addRR(guild, channel, messageId, reaction, role) {

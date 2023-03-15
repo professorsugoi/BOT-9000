@@ -22,13 +22,6 @@ module.exports = {
 		const response = await getRank(message, member, data.settings);
 		await message.safeReply(response);
 	},
-
-	async interactionRun(interaction, data) {
-		const user = interaction.options.getUser('user') || interaction.user;
-		const member = await interaction.guild.members.fetch(user);
-		const response = await getRank(interaction, member, data.settings);
-		await interaction.followUp(response);
-	},
 };
 
 async function getRank({ guild }, member, settings) {

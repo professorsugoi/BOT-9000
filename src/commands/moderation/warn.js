@@ -21,15 +21,6 @@ module.exports = {
 		const response = await warn(message.member, target, reason);
 		await message.safeReply(response);
 	},
-
-	async interactionRun(interaction) {
-		const user = interaction.options.getUser('user');
-		const reason = interaction.options.getString('reason');
-		const target = await interaction.guild.members.fetch(user.id);
-
-		const response = await warn(interaction.member, target, reason);
-		await interaction.followUp(response);
-	},
 };
 
 async function warn(issuer, target, reason) {

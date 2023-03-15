@@ -41,21 +41,6 @@ module.exports = {
 
 		await message.safeReply(response);
 	},
-
-	async interactionRun(interaction, data) {
-		const sub = interaction.options.getSubcommand();
-
-		let response;
-		if (sub === 'limit') {
-			response = await setLimit(interaction.options.getInteger('amount'), data.settings);
-		}
-
-		if (sub === 'action') {
-			response = await setAction(interaction.guild, interaction.options.getString('action'), data.settings);
-		}
-
-		await interaction.followUp(response);
-	},
 };
 
 async function setLimit(limit, settings) {

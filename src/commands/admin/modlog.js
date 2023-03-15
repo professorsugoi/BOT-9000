@@ -25,11 +25,6 @@ module.exports = {
 		const response = await setChannel(targetChannel, data.settings);
 		return message.safeReply(response);
 	},
-
-	async interactionRun(interaction, data) {
-		const response = await setChannel(interaction.options.getChannel('channel'), data.settings);
-		return interaction.followUp(response);
-	},
 };
 
 async function setChannel(targetChannel, settings) {

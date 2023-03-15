@@ -1,7 +1,3 @@
-////////////
-// make this more clear on usage
-// gives invite, not info
-
 const { EmbedBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle } = require('discord.js');
 const { EMBED_COLORS, SUPPORT_SERVER } = require('@root/config');
 
@@ -9,6 +5,14 @@ const { EMBED_COLORS, SUPPORT_SERVER } = require('@root/config');
  * @type {import("@structures/Command")}
  */
 module.exports = {
+	name: 'botinvite',
+	description: 'gives you bot invite',
+	category: 'INFORMATION',
+	botPermissions: ['EmbedLinks'],
+	command: {
+		enabled: true,
+	},
+
 	async messageRun(message, args) {
 		const response = botinvite(message.client);
 		try {

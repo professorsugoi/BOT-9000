@@ -3,21 +3,6 @@ const { EMBED_COLORS } = require('@root/config');
 const moment = require('moment');
 
 /**
- * @type {import("@structures/Command")}
- */
-module.exports = {
-	name: 'guildinfo',
-	description: 'shows information about the server',
-	category: 'INFORMATION',
-	botPermissions: ['EmbedLinks'],
-	cooldown: 5,
-	command: {
-		enabled: true,
-		aliases: ['serverinfo'],
-	},
-};
-
-/**
  * @param {import('discord.js').Guild} guild
  */
 module.exports = async (guild) => {

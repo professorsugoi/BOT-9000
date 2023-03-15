@@ -115,68 +115,11 @@ module.exports = {
 
 		await message.safeReply(response);
 	},
-
-	async interactionRun(interaction) {
-		const sub = interaction.options.getSubcommand();
-		let response;
-
-		//
-		if (sub === 'start') {
-			const channel = interaction.options.getChannel('channel');
-			return await runModalSetup(interaction, channel);
-		}
-
-		//
-		else if (sub === 'pause') {
-			const messageId = interaction.options.getString('message_id');
-			response = await pause(interaction.member, messageId);
-		}
-
-		//
-		else if (sub === 'resume') {
-			const messageId = interaction.options.getString('message_id');
-			response = await resume(interaction.member, messageId);
-		}
-
-		//
-		else if (sub === 'end') {
-			const messageId = interaction.options.getString('message_id');
-			response = await end(interaction.member, messageId);
-		}
-
-		//
-		else if (sub === 'reroll') {
-			const messageId = interaction.options.getString('message_id');
-			response = await reroll(interaction.member, messageId);
-		}
-
-		//
-		else if (sub === 'list') {
-			response = await list(interaction.member);
-		}
-
-		//
-		else if (sub === 'edit') {
-			const messageId = interaction.options.getString('message_id');
-			const addDurationMs = ems(interaction.options.getInteger('add_duration'));
-			if (!addDurationMs) {
-				return interaction.followUp('Not a valid duration');
-			}
-			const newPrize = interaction.options.getString('new_prize');
-			const newWinnerCount = interaction.options.getInteger('new_winners');
-			response = await edit(interaction.member, messageId, addDurationMs, newPrize, newWinnerCount);
-		}
-
-		//
-		else response = 'Invalid subcommand';
-
-		await interaction.followUp(response);
-	},
 };
 
 // Modal Giveaway setup
 /**
- * @param {import('discord.js').Message|import('discord.js').CommandInteraction} args0
+ * @param {import('discord.js').Message} args0
  * @param {import('discord.js').GuildTextBasedChannel} targetCh
  */
 async function runModalSetup({ member, channel, guild }, targetCh) {

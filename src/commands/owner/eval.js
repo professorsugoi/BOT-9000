@@ -32,19 +32,6 @@ module.exports = {
 		}
 		await message.safeReply(response);
 	},
-
-	async interactionRun(interaction) {
-		const input = interaction.options.getString('expression');
-
-		let response;
-		try {
-			const output = eval(input);
-			response = buildSuccessResponse(output, interaction.client);
-		} catch (ex) {
-			response = buildErrorResponse(ex);
-		}
-		await interaction.followUp(response);
-	},
 };
 
 const buildSuccessResponse = (output, client) => {

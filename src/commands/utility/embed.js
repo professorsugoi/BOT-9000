@@ -36,15 +36,6 @@ module.exports = {
 		message.reply(`Embed setup started in ${channel}`);
 		await embedSetup(channel, message.member);
 	},
-
-	async interactionRun(interaction) {
-		const channel = interaction.options.getChannel('channel');
-		if (!channel.canSendEmbeds()) {
-			return interaction.followUp("I don't have permission to send embeds in that channel");
-		}
-		interaction.followUp(`Embed setup started in ${channel}`);
-		await embedSetup(channel, interaction.member);
-	},
 };
 
 /**

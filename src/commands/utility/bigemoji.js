@@ -7,7 +7,7 @@ const { parse } = require('twemoji-parser');
  */
 module.exports = {
 	name: 'bigemoji',
-	description: 'enlarge an emoji',
+	description: 'Enlarge an emoji',
 	category: 'UTILITY',
 	botPermissions: ['EmbedLinks'],
 	command: {
@@ -21,12 +21,6 @@ module.exports = {
 		const emoji = args[0];
 		const response = getEmoji(message.author, emoji);
 		await message.safeReply(response);
-	},
-
-	async interactionRun(interaction) {
-		const emoji = interaction.options.getString('emoji');
-		const response = getEmoji(interaction.user, emoji);
-		await interaction.followUp(response);
 	},
 };
 
