@@ -1,4 +1,3 @@
-const { isHex } = require('@helpers/Utils');
 const { buildGreeting } = require('@handlers/greeting');
 
 /**
@@ -28,22 +27,6 @@ module.exports = {
 			{
 				trigger: 'desc <text>',
 				description: 'set embed description',
-			},
-			{
-				trigger: 'thumbnail <ON|OFF>',
-				description: 'enable/disable embed thumbnail',
-			},
-			{
-				trigger: 'color <hexcolor>',
-				description: 'set embed color',
-			},
-			{
-				trigger: 'footer <text>',
-				description: 'set embed footer content',
-			},
-			{
-				trigger: 'image <url>',
-				description: 'set embed image',
 			},
 		],
 	},
@@ -77,35 +60,6 @@ module.exports = {
 			if (args.length < 2) return message.safeReply('Insufficient arguments! Please provide valid content');
 			const desc = args.slice(1).join(' ');
 			response = await setDescription(settings, desc);
-		}
-
-		// thumbnail
-		else if (type === 'thumbnail') {
-			const status = args[1]?.toUpperCase();
-			if (!status || !['ON', 'OFF'].includes(status))
-				return message.safeReply('Invalid status. Value must be `on/off`');
-			response = await setThumbnail(settings, status);
-		}
-
-		// color
-		else if (type === 'color') {
-			const color = args[1];
-			if (!color || !isHex(color)) return message.safeReply('Invalid color. Value must be a valid hex color');
-			response = await setColor(settings, color);
-		}
-
-		// footer
-		else if (type === 'footer') {
-			if (args.length < 2) return message.safeReply('Insufficient arguments! Please provide valid content');
-			const content = args.slice(1).join(' ');
-			response = await setFooter(settings, content);
-		}
-
-		// image
-		else if (type === 'image') {
-			const url = args[1];
-			if (!url) return message.safeReply('Invalid image url. Please provide a valid url');
-			response = await setImage(settings, url);
 		}
 
 		//
@@ -147,30 +101,6 @@ async function setChannel(settings, channel) {
 
 async function setDescription(settings, desc) {
 	settings.welcome.embed.description = desc;
-	await settings.save();
-	return 'Configuration saved! Welcome message updated';
-}
-
-async function setThumbnail(settings, status) {
-	settings.welcome.embed.thumbnail = status.toUpperCase() === 'ON' ? true : false;
-	await settings.save();
-	return 'Configuration saved! Welcome message updated';
-}
-
-async function setColor(settings, color) {
-	settings.welcome.embed.color = color;
-	await settings.save();
-	return 'Configuration saved! Welcome message updated';
-}
-
-async function setFooter(settings, content) {
-	settings.welcome.embed.footer = content;
-	await settings.save();
-	return 'Configuration saved! Welcome message updated';
-}
-
-async function setImage(settings, url) {
-	settings.welcome.embed.image = url;
 	await settings.save();
 	return 'Configuration saved! Welcome message updated';
 }

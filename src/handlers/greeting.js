@@ -1,70 +1,46 @@
-const { EmbedBuilder } = require('discord.js');
+const { getMember } = require('@schemas/Member');
 const { getSettings } = require('@schemas/Guild');
+const { INVITES } = require('@root/config');
 
 /**
- * @param {string} content
- * @param {import('discord.js').GuildMember} member
+ * parse variables for easier user reference
  */
-const parse = async (content, member = {}) => {
+const parse = async (content, member, usedInvite = {}, inviteName) => {
 	return content
 		.replaceAll(/\\n/g, '\n')
 		.replaceAll(/{server}/g, member.guild.name)
 		.replaceAll(/{count}/g, member.guild.memberCount)
-		.replaceAll(/{member:nick}/g, member.displayName)
-		.replaceAll(/{member:name}/g, member.user.username)
-		.replaceAll(/{member:dis}/g, member.user.discriminator)
-		.replaceAll(/{member:tag}/g, member.user.tag)
-		.replaceAll(/{member:avatar}/g, member.displayAvatarURL());
+		.replaceAll(/{user:nick}/g, member.displayName)
+		.replaceAll(/{user:name}/g, member.user.username)
+		.replaceAll(/{user:tag}/g, member.user.tag)
+		.replaceAll(/{user:mention}/g, member.toString())
+		.replaceAll(/{invite:source}/g, usedInvite?.channel?.toString() || inviteName || 'an unknown source');
 };
 
 /**
- * @param {import('discord.js').GuildMember} member
- * @param {"WELCOME"|"FAREWELL"} type
- * @param {Object} config
- * @param {Object} inviterData
+ * build greeting
  */
-const buildGreeting = async (member, type, config, inviterData) => {
+const buildGreeting = async (member, type, config, inviteName, usedInvite) => {
 	if (!config) return;
 	let content;
 
 	// build content
-	if (config.content) content = await parse(config.content, member, inviterData);
-
-	// build embed
-	const embed = new EmbedBuilder();
-	if (config.embed.description) {
-		const parsed = await parse(config.embed.description, member, inviterData);
-		embed.setDescription(parsed);
-	}
-	if (config.embed.color) embed.setColor(config.embed.color);
-	if (config.embed.thumbnail) embed.setThumbnail(member.user.displayAvatarURL());
-	if (config.embed.footer) {
-		const parsed = await parse(config.embed.footer, member, inviterData);
-		embed.setFooter({ text: parsed });
-	}
-	if (config.embed.image) {
-		const parsed = await parse(config.embed.image, member);
-		embed.setImage(parsed);
-	}
+	if (config.content) content = await parse(config.content, member, inviteName, usedInvite);
 
 	// set default message
-	if (!config.content && !config.embed.description && !config.embed.footer) {
+	if (!config.content) {
 		content =
 			type === 'WELCOME'
-				? `Welcome to the server, ${member.displayName} 🎉`
-				: `${member.user.tag} has left the server 👋`;
-		return { content };
+				? `${member.toString()} joined from ${usedInvite?.channel?.toString() || inviteName}!🎉`
+				: `${member.toString()} has left the server 👋`;
 	}
-
-	return { content, embeds: [embed] };
+	return { content };
 };
 
 /**
  * Send welcome message
- * @param {import('discord.js').GuildMember} member
- * @param {Object} inviterData
  */
-async function sendWelcome(member, inviterData = {}) {
+async function sendWelcome(member = {}) {
 	const config = (await getSettings(member.guild))?.welcome;
 	if (!config || !config.enabled) return;
 
@@ -72,18 +48,24 @@ async function sendWelcome(member, inviterData = {}) {
 	const channel = member.guild.channels.cache.get(config.channel);
 	if (!channel) return;
 
-	// build welcome message
-	const response = await buildGreeting(member, 'WELCOME', config, inviterData);
+	const memberData = await getMember(member.guild.id, member.id);
+	if (!memberData || !memberData.invite_data || !memberData.invite_data.inviter) return;
 
+	const fetchedInvites = await member.guild.invites.fetch();
+	const usedInvite = fetchedInvites.find(
+		(invite) => invite.code === memberData.invite_data.code && invite.uses > memberData.invite_data.uses
+	);
+	const inviteName = INVITES[memberData.invite_data.code] || memberData.invite_data.code;
+
+	// send welcome message
+	const response = await buildGreeting(member, 'WELCOME', config, inviteName, usedInvite);
 	channel.safeSend(response);
 }
 
 /**
  * Send farewell message
- * @param {import('discord.js').GuildMember} member
- * @param {Object} inviterData
  */
-async function sendFarewell(member, inviterData = {}) {
+async function sendFarewell(member = {}) {
 	const config = (await getSettings(member.guild))?.farewell;
 	if (!config || !config.enabled) return;
 
@@ -91,9 +73,8 @@ async function sendFarewell(member, inviterData = {}) {
 	const channel = member.guild.channels.cache.get(config.channel);
 	if (!channel) return;
 
-	// build farewell message
-	const response = await buildGreeting(member, 'FAREWELL', config, inviterData);
-
+	// send farewell message
+	const response = await buildGreeting(member, 'FAREWELL', config);
 	channel.safeSend(response);
 }
 
