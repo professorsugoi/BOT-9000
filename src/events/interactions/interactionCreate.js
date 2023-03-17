@@ -1,5 +1,5 @@
 const { getSettings } = require('@schemas/Guild');
-const { commandHandler, contextHandler, statsHandler } = require('@src/handlers');
+const { contextHandler, statsHandler } = require('@src/handlers');
 
 /**
  * @param {import('@src/structures').BotClient} client
@@ -10,11 +10,6 @@ module.exports = async (client, interaction) => {
 		return interaction
 			.reply({ content: 'Command can only be executed in a discord server', ephemeral: true })
 			.catch(() => {});
-	}
-
-	// Slash Commands
-	if (interaction.isChatInputCommand()) {
-		await commandHandler.handleSlashCommand(interaction);
 	}
 
 	// Context Menu
@@ -29,4 +24,3 @@ module.exports = async (client, interaction) => {
 	// track stats
 	if (settings.stats.enabled) statsHandler.trackInteractionStats(interaction).catch(() => {});
 };
-

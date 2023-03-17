@@ -1,3 +1,5 @@
+// update to show current config when using no args
+
 /**
  * @type {import("@structures/Command")}
  */

@@ -91,4 +91,3 @@ module.exports = class Logger {
 		pinoLogger.debug(content);
 	}
 };
-

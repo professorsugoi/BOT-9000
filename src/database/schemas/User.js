@@ -10,6 +10,8 @@ const Schema = new mongoose.Schema(
 		username: String,
 		discriminator: String,
 		logged: Boolean,
+		coins: { type: Number, default: 0 },
+		bank: { type: Number, default: 0 },
 		reputation: {
 			received: { type: Number, default: 0 },
 			given: { type: Number, default: 0 },
@@ -68,4 +70,3 @@ module.exports = {
 			.lean();
 	},
 };
-

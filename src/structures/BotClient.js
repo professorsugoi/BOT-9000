@@ -1,11 +1,4 @@
-const {
-	Client,
-	Collection,
-	GatewayIntentBits,
-	Partials,
-	WebhookClient,
-	ApplicationCommandType,
-} = require('discord.js');
+const { Client, Collection, GatewayIntentBits, Partials, WebhookClient } = require('discord.js');
 const path = require('path');
 const { table } = require('table');
 const Logger = require('../helpers/Logger');
@@ -45,14 +38,10 @@ module.exports = class BotClient extends Client {
 		this.commandIndex = new Collection(); // store (alias, arrayIndex) pair
 
 		/**
-		 * @type {Collection<string, import('@structures/Command')>}
-		 */
-		this.slashCommands = new Collection(); // store slash commands
-
-		/**
 		 * @type {Collection<string, import('@structures/BaseContext')>}
 		 */
 		this.contextMenus = new Collection(); // store contextMenus
+		this.counterUpdateQueue = []; // store guildId's that needs counter update
 
 		// initialize webhook for sending guild join/leave details
 		this.joinLeaveWebhook = process.env.JOIN_LEAVE_LOGS
@@ -147,14 +136,6 @@ module.exports = class BotClient extends Client {
 		} else {
 			this.logger.debug(`Skipping command ${cmd.name}. Disabled!`);
 		}
-
-		// Slash Command
-		if (cmd.slashCommand?.enabled) {
-			if (this.slashCommands.has(cmd.name)) throw new Error(`Slash Command ${cmd.name} already registered`);
-			this.slashCommands.set(cmd.name, cmd);
-		} else {
-			this.logger.debug(`Skipping slash command ${cmd.name}. Disabled!`);
-		}
 	}
 
 	/**
@@ -176,8 +157,6 @@ module.exports = class BotClient extends Client {
 		}
 
 		this.logger.success(`Loaded ${this.commands.length} commands`);
-		this.logger.success(`Loaded ${this.slashCommands.size} slash commands`);
-		if (this.slashCommands.size > 100) throw new Error('A maximum of 100 slash commands can be enabled');
 	}
 
 	/**
@@ -216,18 +195,6 @@ module.exports = class BotClient extends Client {
 	 */
 	async registerInteractions(guildId) {
 		const toRegister = [];
-
-		// filter slash commands
-		if (this.config.INTERACTIONS.SLASH) {
-			this.slashCommands
-				.map((cmd) => ({
-					name: cmd.name,
-					description: cmd.description,
-					type: ApplicationCommandType.ChatInput,
-					options: cmd.slashCommand.options,
-				}))
-				.forEach((s) => toRegister.push(s));
-		}
 
 		// filter contexts
 		if (this.config.INTERACTIONS.CONTEXT) {
@@ -309,26 +276,26 @@ module.exports = class BotClient extends Client {
 			scopes: ['bot', 'applications.commands'],
 			permissions: [
 				'AddReactions',
-				// 'AttachFiles',
+				'AttachFiles',
 				'BanMembers',
 				'ChangeNickname',
-				// 'Connect',
-				// 'DeafenMembers',
+				'Connect',
+				'DeafenMembers',
 				'EmbedLinks',
 				'KickMembers',
 				'ManageChannels',
-				// 'ManageGuild',
+				'ManageGuild',
 				'ManageMessages',
 				'ManageNicknames',
 				'ManageRoles',
 				'ModerateMembers',
 				'MoveMembers',
 				'MuteMembers',
-				// 'PrioritySpeaker',
+				'PrioritySpeaker',
 				'ReadMessageHistory',
 				'SendMessages',
 				'SendMessagesInThreads',
-				// 'Speak',
+				'Speak',
 				'ViewChannel',
 			],
 		});

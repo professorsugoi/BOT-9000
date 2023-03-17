@@ -64,4 +64,3 @@ module.exports = {
 			.sort({ level: -1, xp: -1 })
 			.lean(),
 };
-

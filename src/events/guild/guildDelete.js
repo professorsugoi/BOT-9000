@@ -58,4 +58,3 @@ module.exports = async (client, guild) => {
 		embeds: [embed],
 	});
 };
-

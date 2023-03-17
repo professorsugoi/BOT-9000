@@ -22,6 +22,7 @@ custom bot for DEVILISH server
 - clean up `!rep view`, `!daily`
 - add rep count to !stats card (?)
 - streamline setup commands
+- setup roles post
 
 ## CLEANUP
 

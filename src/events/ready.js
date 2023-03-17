@@ -1,4 +1,4 @@
-const { inviteHandler, presenceHandler } = require('@src/handlers');
+const { counterHandler, inviteHandler, presenceHandler } = require('@src/handlers');
 const { cacheReactionRoles } = require('@schemas/ReactionRoles');
 const { getSettings } = require('@schemas/Guild');
 
@@ -31,9 +31,16 @@ module.exports = async (client) => {
 	for (const guild of client.guilds.cache.values()) {
 		const settings = await getSettings(guild);
 
+		// initialize counter
+		if (settings.counters.length > 0) {
+			await counterHandler.init(guild, settings);
+		}
+
 		// cache invites
 		if (settings.invite.tracking) {
 			inviteHandler.cacheGuildInvites(guild);
 		}
 	}
+
+	setInterval(() => counterHandler.updateCounterChannels(client), 10 * 60 * 1000);
 };

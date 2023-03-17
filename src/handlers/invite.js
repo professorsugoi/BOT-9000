@@ -88,6 +88,7 @@ async function trackJoinedMember(member) {
 		await inviterDb.save();
 		inviterData = inviterDb;
 	}
+
 	return inviterData;
 }
 
@@ -111,6 +112,7 @@ async function trackLeftMember(guild, user) {
 		await inviterDb.save();
 		inviterData = inviterDb;
 	}
+
 	return inviterData;
 }
 
@@ -123,4 +125,3 @@ module.exports = {
 	getEffectiveInvites,
 	cacheInvite,
 };
-

@@ -12,9 +12,7 @@ const ReqString = {
 const Schema = new mongoose.Schema(
 	{
 		guild_id: ReqString,
-		member_id: ReqString,
-		strikes: { type: Number, default: 0 },
-		warnings: { type: Number, default: 0 },
+		channel_id: ReqString,
 		invite_data: {
 			inviter: String,
 			code: String,
@@ -32,7 +30,7 @@ const Schema = new mongoose.Schema(
 	}
 );
 
-const Model = mongoose.model('members', Schema);
+const Model = mongoose.model('invites', Schema);
 
 module.exports = {
 	getMember: async (guildId, memberId) => {

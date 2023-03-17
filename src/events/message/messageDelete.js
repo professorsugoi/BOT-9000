@@ -47,4 +47,3 @@ module.exports = async (client, message) => {
 		logChannel.safeSend({ embeds: [embed] });
 	}
 };
-

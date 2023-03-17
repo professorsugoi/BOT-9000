@@ -1,54 +1,59 @@
 const config = require('@root/config');
 
 module.exports = {
+	MOST_USED: {
+		name: 'Most Used',
+		image: 'https://img.icons8.com/nolan/256/1A6DFF/C822FF/star.png',
+		emoji: '⭐',
+	},
 	ADMIN: {
 		name: 'Admin',
-		image: 'https://icons.iconarchive.com/icons/dakirby309/simply-styled/256/Settings-icon.png',
-		emoji: '⭐',
+		image: 'https://img.icons8.com/nolan/256/omori-sprite.png',
+		emoji: '👁‍🗨',
 	},
 	AUTOMOD: {
 		name: 'Automod',
 		enabled: config.AUTOMOD.ENABLED,
-		image: 'https://icons.iconarchive.com/icons/dakirby309/simply-styled/256/Settings-icon.png',
+		image: 'https://img.icons8.com/nolan/256/bot.png',
 		emoji: '👁‍🗨',
 	},
 	GIVEAWAY: {
 		name: 'Giveaway',
 		enabled: config.GIVEAWAYS.ENABLED,
-		image: 'https://cdn-icons-png.flaticon.com/512/4470/4470928.png',
-		emoji: '🎉',
+		image: 'https://img.icons8.com/nolan/256/confetti.png',
+		emoji: 'ℹ',
 	},
 	INFORMATION: {
 		name: 'Information',
-		image: 'https://icons.iconarchive.com/icons/graphicloads/100-flat/128/information-icon.png',
+		image: 'https://img.icons8.com/nolan/256/1A6DFF/C822FF/information.png',
 		emoji: 'ℹ',
 	},
 	MODERATION: {
 		name: 'Moderation',
 		enabled: config.MODERATION.ENABLED,
-		image: 'https://icons.iconarchive.com/icons/lawyerwordpress/law/128/Gavel-Law-icon.png',
-		emoji: '🐸',
+		image: 'https://img.icons8.com/nolan/256/1A6DFF/C822FF/millenium-eye.png',
+		emoji: '👁‍🗨',
 	},
 	OWNER: {
 		name: 'Owner',
-		image: 'https://www.pinclipart.com/picdir/middle/531-5318253_web-designing-icon-png-clipart.png',
-		emoji: '🖤',
+		image: 'https://img.icons8.com/nolan/256/third-eye-symbol.png',
+		emoji: '👁‍🗨',
 	},
 	SOCIAL: {
 		name: 'Social',
-		image: 'https://icons.iconarchive.com/icons/dryicons/aesthetica-2/128/community-users-icon.png',
-		emoji: '🌱',
+		image: 'https://img.icons8.com/nolan/1x/1A6DFF/C822FF/filled-like.png',
+		emoji: 'ℹ',
 	},
 	STATS: {
 		name: 'Statistics',
 		enabled: config.STATS.ENABLED,
-		image: 'https://icons.iconarchive.com/icons/graphicloads/flat-finance/256/dollar-stats-icon.png',
-		emoji: '📈',
+		image: 'https://img.icons8.com/nolan/256/1A6DFF/C822FF/combo-chart.png',
+		emoji: 'ℹ',
 	},
 	UTILITY: {
 		name: 'Utility',
-		image: 'https://icons.iconarchive.com/icons/blackvariant/button-ui-system-folders-alt/128/Utilities-icon.png',
-		emoji: '🛠',
+		image: 'https://img.icons8.com/nolan/256/fantasy.png',
+		emoji: 'ℹ',
 	},
 };
 
