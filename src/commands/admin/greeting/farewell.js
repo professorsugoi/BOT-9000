@@ -1,4 +1,3 @@
-const { isHex } = require('@helpers/Utils');
 const { buildGreeting } = require('@handlers/greeting');
 
 /**
@@ -19,31 +18,15 @@ module.exports = {
 			},
 			{
 				trigger: 'channel <#channel>',
-				description: 'configure farewell message',
+				description: 'configure farewell message channel',
 			},
 			{
 				trigger: 'preview',
 				description: 'preview the configured farewell message',
 			},
 			{
-				trigger: 'desc <text>',
-				description: 'set embed description',
-			},
-			{
-				trigger: 'thumbnail <ON|OFF>',
-				description: 'enable/disable embed thumbnail',
-			},
-			{
-				trigger: 'color <hexcolor>',
-				description: 'set embed color',
-			},
-			{
-				trigger: 'footer <text>',
-				description: 'set embed footer content',
-			},
-			{
-				trigger: 'image <url>',
-				description: 'set embed image',
+				trigger: 'msg <text>',
+				description: 'set farewell message',
 			},
 		],
 	},
@@ -72,40 +55,11 @@ module.exports = {
 			response = await setChannel(settings, channel);
 		}
 
-		// desc
-		else if (type === 'desc') {
+		// msg
+		else if (type === 'msg') {
 			if (args.length < 2) return message.safeReply('Insufficient arguments! Please provide valid content');
-			const desc = args.slice(1).join(' ');
-			response = await setDescription(settings, desc);
-		}
-
-		// thumbnail
-		else if (type === 'thumbnail') {
-			const status = args[1]?.toUpperCase();
-			if (!status || !['ON', 'OFF'].includes(status))
-				return message.safeReply('Invalid status. Value must be `on/off`');
-			response = await setThumbnail(settings, status);
-		}
-
-		// color
-		else if (type === 'color') {
-			const color = args[1];
-			if (!color || !isHex(color)) return message.safeReply('Invalid color. Value must be a valid hex color');
-			response = await setColor(settings, color);
-		}
-
-		// footer
-		else if (type === 'footer') {
-			if (args.length < 2) return message.safeReply('Insufficient arguments! Please provide valid content');
-			const content = args.slice(1).join(' ');
-			response = await setFooter(settings, content);
-		}
-
-		// image
-		else if (type === 'image') {
-			const url = args[1];
-			if (!url) return message.safeReply('Invalid image url. Please provide a valid url');
-			response = await setImage(settings, url);
+			const msg = args.slice(1).join(' ');
+			response = await setFarewellMessage(settings, msg);
 		}
 
 		//
@@ -145,32 +99,8 @@ async function setChannel(settings, channel) {
 	return `Configuration saved! Farewell message will be sent to ${channel ? channel.toString() : 'Not found'}`;
 }
 
-async function setDescription(settings, desc) {
-	settings.farewell.embed.description = desc;
-	await settings.save();
-	return 'Configuration saved! Farewell message updated';
-}
-
-async function setThumbnail(settings, status) {
-	settings.farewell.embed.thumbnail = status.toUpperCase() === 'ON' ? true : false;
-	await settings.save();
-	return 'Configuration saved! Farewell message updated';
-}
-
-async function setColor(settings, color) {
-	settings.farewell.embed.color = color;
-	await settings.save();
-	return 'Configuration saved! Farewell message updated';
-}
-
-async function setFooter(settings, content) {
-	settings.farewell.embed.footer = content;
-	await settings.save();
-	return 'Configuration saved! Farewell message updated';
-}
-
-async function setImage(settings, url) {
-	settings.farewell.embed.image = url;
+async function setFarewellMessage(settings, msg) {
+	settings.farewell.farellMessage = msg;
 	await settings.save();
 	return 'Configuration saved! Farewell message updated';
 }

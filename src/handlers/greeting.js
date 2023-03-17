@@ -3,7 +3,7 @@ const { getSettings } = require('@schemas/Guild');
 const { INVITES } = require('@root/config');
 
 /**
- * parse variables for easier user reference
+ * parse variables for user reference
  */
 const parse = async (content, member, usedInvite = {}, inviteName) => {
 	return content
@@ -31,7 +31,7 @@ const buildGreeting = async (member, type, config, inviteName, usedInvite) => {
 	if (!config.content) {
 		content =
 			type === 'WELCOME'
-				? `${member.toString()} joined from ${usedInvite?.channel?.toString() || inviteName}!🎉`
+				? `${member.toString()} joined from ${usedInvite?.channel?.toString() || inviteName}! 🎉`
 				: `${member.toString()} has left the server 👋`;
 	}
 	return { content };

@@ -18,15 +18,15 @@ module.exports = {
 			},
 			{
 				trigger: 'channel <#channel>',
-				description: 'configure welcome message',
+				description: 'configure welcome message channel',
 			},
 			{
 				trigger: 'preview',
 				description: 'preview the configured welcome message',
 			},
 			{
-				trigger: 'desc <text>',
-				description: 'set embed description',
+				trigger: 'msg <text>',
+				description: 'set welcome message',
 			},
 		],
 	},
@@ -55,11 +55,11 @@ module.exports = {
 			response = await setChannel(settings, channel);
 		}
 
-		// desc
-		else if (type === 'desc') {
+		// msg
+		else if (type === 'msg') {
 			if (args.length < 2) return message.safeReply('Insufficient arguments! Please provide valid content');
-			const desc = args.slice(1).join(' ');
-			response = await setDescription(settings, desc);
+			const msg = args.slice(1).join(' ');
+			response = await setWelcomeMessage(settings, msg);
 		}
 
 		//
@@ -99,8 +99,8 @@ async function setChannel(settings, channel) {
 	return `Configuration saved! Welcome message will be sent to ${channel ? channel.toString() : 'Not found'}`;
 }
 
-async function setDescription(settings, desc) {
-	settings.welcome.embed.description = desc;
+async function setWelcomeMessage(settings, msg) {
+	settings.welcome.welcomeMessage = msg;
 	await settings.save();
 	return 'Configuration saved! Welcome message updated';
 }
