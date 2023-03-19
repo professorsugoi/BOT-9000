@@ -8,7 +8,7 @@ custom bot for DEVILISH server
 ## IMPORTANT
 
 - ~~default permissions~~
-- ~~proxy request~~/
+- ~~proxy request~~
 
 ## TO DO
 
@@ -54,16 +54,3 @@ _gutting slash cmds created a big mess. this is a list to go through it all and 
 - [original repo (by saiteja-madha)](https://github.com/saiteja-madha/discord-js-bot) - comes with awesome utilities right out of the box! (ie. safeSend, resolveMember). at this point the repo i cloned is nearly unrecognizeable, so i highly suggest you go check out the original for a fully featured bot.
 - [embed builder](https://autocode.com/tools/discord/embed-builder) - closely resembles djs' [embed constructor](https://discordjs.guide/popular-topics/embeds.html#embed-preview)
 - [discord.js docs](https://github.com/discordjs/guide)
-
-https://js13kgames.github.io/resources/  
-https://github.com/sunaku/tamzen-font  
-https://kottke.org/plus/type/silkscreen/  
-http://www.pentacom.jp/pentacom/bitfontmaker2/  
-https://www.pentacom.jp/icon/list.html  
-https://github.com/slavfox/Cozette  
-https://github.com/TakWolf/ark-pixel-font  
-https://github.com/apvarun/toastify-js
-
-https://github.com/quiple/galmuri
-
-art tools: pure ref clip studio photoshop cintiq
