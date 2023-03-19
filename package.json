@@ -11,6 +11,7 @@
 	"scripts": {
 		"dev": "nodemon .",
 		"start": "node .",
+		"doppler-run": "doppler run --forward-signals -- nodemon .",
 		"format": "prettier --write src"
 	},
 	"homepage": "https://github.com/saiteja-madha/discord-js-bot#readme",
@@ -22,13 +23,13 @@
 		"url": "https://github.com/saiteja-madha/discord-js-bot/issues"
 	},
 	"dependencies": {
+		"@google-cloud/secret-manager": "^4.2.1",
 		"ascii-table": "0.0.9",
 		"btoa": "^1.2.1",
 		"common-tags": "^1.8.2",
 		"connect-mongo": "^4.6.0",
 		"discord-giveaways": "^6.0.1",
 		"discord.js": "^14.7.1",
-		"dotenv": "^16.0.3",
 		"ejs": "^3.1.8",
 		"enhanced-ms": "^2.2.0",
 		"express": "^4.18.2",
