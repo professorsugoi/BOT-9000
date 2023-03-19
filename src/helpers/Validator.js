@@ -127,31 +127,6 @@ module.exports = class Validator {
 				throw new TypeError("Missing 'messageRun' function");
 			}
 		}
-
-		// Validate Slash Command Details
-		if (cmd.slashCommand) {
-			if (typeof cmd.slashCommand !== 'object') {
-				throw new TypeError('Command.slashCommand must be an object');
-			}
-			if (
-				Object.prototype.hasOwnProperty.call(cmd.slashCommand, 'enabled') &&
-				typeof cmd.slashCommand.enabled !== 'boolean'
-			) {
-				throw new TypeError('Command.slashCommand enabled must be a boolean value');
-			}
-			if (
-				Object.prototype.hasOwnProperty.call(cmd.slashCommand, 'ephemeral') &&
-				typeof cmd.slashCommand.ephemeral !== 'boolean'
-			) {
-				throw new TypeError('Command.slashCommand ephemeral must be a boolean value');
-			}
-			if (cmd.slashCommand.options && !Array.isArray(cmd.slashCommand.options)) {
-				throw new TypeError('Command.slashCommand options must be a array');
-			}
-			if (cmd.slashCommand.enabled && typeof cmd.interactionRun !== 'function') {
-				throw new TypeError("Missing 'interactionRun' function");
-			}
-		}
 	}
 
 	/**
@@ -195,4 +170,3 @@ module.exports = class Validator {
 		}
 	}
 };
-
